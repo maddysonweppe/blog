@@ -58,7 +58,7 @@ class Article
     /**
      * @var bool
      *
-     * @ORM\Column(name="image", type="boolean")
+     * @ORM\Column(name="brouillon", type="boolean")
      */
     private $brouillon;
     
