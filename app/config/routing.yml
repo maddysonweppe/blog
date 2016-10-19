@@ -1,5 +1,7 @@
 admin:
     resource: "@AdminBundle/Controller/"
+site:
+    resource: "@SiteBundle/Controller/"
     type:     annotation
     prefix:   /
 
