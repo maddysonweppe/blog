@@ -55,8 +55,22 @@ class Article
      * @ORM\Column(name="image", type="string", length=255)
      */
     private $image;
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="image", type="boolean")
+     */
+    private $brouillon;
+    
+    function getBrouillon() {
+        return $this->brouillon;
+    }
 
+    function setBrouillon($brouillon) {
+        $this->brouillon = $brouillon;
+    }
 
+    
     /**
      * Get id
      *
