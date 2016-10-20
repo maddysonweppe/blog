@@ -40,12 +40,16 @@ class ViewController extends Controller {
     }
     
      /**
-     * @Route("/detail")
+     * @Route("/{id}/detail")
      * @Template("SiteBundle::detail.html.twig")
      */
-    public function indexDetail()
+    public function indexDetail($id)
     {
-        return null;
+               $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository("AdminBundle:Article")->findById($id);
+        return array(
+           'article' => $article,
+       );
     }
     
 }
