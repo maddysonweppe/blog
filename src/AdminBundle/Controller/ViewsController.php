@@ -50,5 +50,28 @@ class ViewsController extends Controller {
     public function profil() {
         
     }
+    
+    /**
+     * @Route("/admin/autreprofil")
+     * @Template("AdminBundle::autreprofil.html.twig")
+     */
+    public function autreProfil() {
+        
+    }
 
+    /**
+     * @Route("/admin/likesprofil")
+     * @Template("AdminBundle::likes.html.twig")
+     */
+    public function likesProfil() {
+        
+    }
+    
+    /**
+     * @Route("/admin/article")
+     * @Template("AdminBundle::article.html.twig")
+     */
+    public function article() {
+        
+    }
 }
