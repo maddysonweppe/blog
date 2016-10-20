@@ -1,0 +1,10 @@
+<h1>COMMENTAIRE HOME</h1>
+
+{% for commentaire in commentaire %}
+    {{ commentaire.date }}
+    {{ commentaire.texte }}
+    {{ commentaire.pseudo }}
+    
+<a href="{{ path('commentaireEditer', {'id':commentaire.id}) }}">editer profil</a>
+<a href="{{ path('commentaireDelete', {'id':commentaire.id}) }}">Supprimer</a>
+{% endfor %}
