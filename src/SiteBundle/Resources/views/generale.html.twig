@@ -1,43 +1,69 @@
-{% extends "::base.html.twig" %}
+{% extends "::template.html.twig" %}
 {% block body %}
-   <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Accueil</a>
-    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Tennis<span class="sr-only">(current)</span></a></li>
-        <li><a href="#">eSport</a></li>
-        <li><a href="#">Football</a></li>
-        <li><a href="#">Rugby</a></li>
-        <li><a href="#">Connexion</a></li>
-      
-        
-      
-  
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Blog Post Content Column -->
+            <div  class="container">
+                <hr>
+                <div class="col-md-12" >
+                    <div class="col-md-6" >
+                        <!-- Preview Image -->
+                        <img class="img-responsive" src="{{ asset('externe/images/rugby.jpg') }}" alt="">
+                    </div>
+
+
+                    <div class="col-md-6" >
+                        <div class="article">
+                            <!-- Blog article -->
+
+                            <!-- Title -->
+                            <h1 class="titre">The Kicking MACHINE</h1>
+
+                            <!-- Post Content -->
+                            <p class="bliat">JONNY WILKINSON - "The Kicking MACHINE"<br>
+                                Sed lobortis mi. Suspendisse vel placerat ligula.<br>
+                                Vivamus ac sem lac. Ut vehicula rhoncus elementum.<br>
+                                Etiam quis tristique lectus.<br>
+                                Aliquam in arcu eget velit pulvinar dictum vel in justo.<br>
+                                Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.
+
+                                Praesent sed lobortis mi. Suspendisse vel placerat ligula.<br>
+                                Vivamus ac lacus. Ut vehicula rhoncus elementum.<br>
+                                Etiam quis tristique lectus.<br>
+                                Aliquam in arcu eget velit pulvinar dict vel in justo.<br>
+                                Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-    
-       
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-   
-  
-   {% endblock %}
+    </div>
+    <!-- /.row -->
+
+
+
+</div>
+</div>
+
+</div>
+<!-- /.row -->
+</div>
+
+</div>
+
+</div>
+<!-- /.row -->
+
+
+
+
+
+</div>
+<!-- /.container -->
+
+
+{% endblock %}
