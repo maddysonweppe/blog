@@ -26,7 +26,7 @@
                     <hr>
 
                     <!-- Date/Time -->
-                    <p><span class="glyphicon glyphicon-time"></span> Publié le {{ article.date }} à 14 heures 68.</p>
+                    <p><span class="glyphicon glyphicon-time"></span> Publié le <time>{{ article.date|date('d M Y') }}</time>.</p>
 
                     <hr>
 
@@ -51,31 +51,35 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Envoyez</button>
                         </form>#}
-                        {{form_start(formCommentaire,{'attr':{'action':path('addCommentaire')}})}}
-
-
+                        {{form_start(formCommentaire,{'attr':{'action':path('sauvegardeCommentaire')}})}}
+                        <div class="form-group">
+                        {{ form_row(formCommentaire.texte,{'attr':{'class' : 'form-control'}}) }}
+                        </div>
+                        {{ form_row(formCommentaire.pseudo) }}
+                        {{ form_row(formCommentaire.valider,{'attr':{'class' : 'btn btn-primary'}}) }}
+                     
                         {{form_end(formCommentaire)}}
                     </div>
 
                     <hr>
 
-                    <!-- Posted Comments -->
-
+                   
                     <!-- Comment -->
+                    {% for commentaire in commentaire %}
                     <div class="media">
                         <a class="pull-left" href="#">
                             <img class="media-object" src="http://placehold.it/64x64" alt="">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading">Sebastien Javary
-                                <small>le 19 octobre à 19 h 58</small>
+                            <h4 class="media-heading">{{ commentaire.pseudo }}
+                                <small><time>{{ commentaire.date|date('d M Y') }}</time></small>
                             </h4>
-                            Wow incroyable, je n'aurais jamais pensais qu'alexandre étais capable de gagner ce concours, étant plus jeune j'ai refuser plusieurs de ses rendez-vous a la pétanque du coin
+                            {{ commentaire.texte }}
                         </div>
                     </div>
-
+                    {% endfor %}
                     <!-- Comment -->
-                    <div class="media">
+                    {#<div class="media">
                         <a class="pull-left" href="#">
                             <img class="media-object" src="http://placehold.it/64x64" alt="">
                         </a>
@@ -98,7 +102,7 @@
                             </div>
                             <!-- End Nested Comment -->
                         </div>
-                    </div>
+                    </div>#}
 
                 </div>
 

@@ -1,12 +1,12 @@
 <h1>ARTICLE HOME</h1>
 
 {% for article in article %}
-    {{ article.date }}
-    {{ article.texte }}
-    {{ article.titre }}
-    {{ article.categorie }}
-    {{ article.image }}
-    
-<a href="{{ path('articleEditer', {'id':article.id}) }}">editer profil</a>
-<a href="{{ path('articleDelete', {'id':article.id}) }}">Supprimer</a>
+    <time>{{ article.date|date('d M Y') }}</time><br><br>
+    {{ article.texte }}<br>
+    {{ article.titre }}<br>
+    {{ article.categorie }}<br>
+    {{ article.image }}<br>
+
+    <a href="{{ path('articleEditer', {'id':article.id}) }}">editer profil</a><br>
+    <a href="{{ path('articleDelete', {'id':article.id}) }}">Supprimer</a>
 {% endfor %}

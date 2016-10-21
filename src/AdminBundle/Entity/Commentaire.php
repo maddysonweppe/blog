@@ -4,6 +4,8 @@ namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+//Pour afficher la date automatique voir la syntaxe du construct
+
 /**
  * Commentaire
  *
@@ -22,9 +24,9 @@ class Commentaire
     private $id;
 
     /**
-     * @var string
+     * @var DateTime
      *
-     * @ORM\Column(name="date", type="string", length=255)
+     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
@@ -137,6 +139,10 @@ class Commentaire
     public function getPseudo()
     {
         return $this->pseudo;
+    }
+    
+    function __construct() {
+        $this->date = new \DateTime();
     }
 }
 

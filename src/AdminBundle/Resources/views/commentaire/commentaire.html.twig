@@ -1,7 +1,7 @@
 <h1>COMMENTAIRE HOME</h1>
 
 {% for commentaire in commentaire %}
-    {{ commentaire.date }}
+    <time>{{ commentaire.date|date('d M Y') }}</time><br><br>
     {{ commentaire.texte }}
     {{ commentaire.pseudo }}
     

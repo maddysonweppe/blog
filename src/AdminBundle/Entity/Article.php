@@ -4,6 +4,8 @@ namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+//Pour afficher la date automatique voir la syntaxe du construct
+
 /**
  * Article
  *
@@ -22,9 +24,9 @@ class Article
     private $id;
 
     /**
-     * @var string
+     * @var DateTime
      *
-     * @ORM\Column(name="date", type="string", length=255)
+     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
@@ -199,6 +201,10 @@ class Article
     public function getImage()
     {
         return $this->image;
+    }
+    
+    function __construct() {
+        $this->date = new \DateTime();
     }
 }
 
