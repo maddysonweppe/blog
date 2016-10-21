@@ -303,10 +303,26 @@ class ViewsController extends Controller {
     }
     
     /**
-     * @Route("/admin/article")
+     * @Route("/admin/articles")
      * @Template("AdminBundle::article.html.twig")
      */
     public function articleLol() {
+        
+    }
+    
+    /**
+     * @Route("/admin/articlesBrouillons")
+     * @Template("AdminBundle::articlesBrouillons.html.twig")
+     */
+    public function articleBrouillons() {
+        
+    }
+    
+        /**
+     * @Route("/admin/commentairess")
+     * @Template("AdminBundle::autreprofil.html.twig")
+     */
+    public function commentairesProfil() {
         
     }
 }
