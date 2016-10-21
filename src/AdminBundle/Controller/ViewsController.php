@@ -9,9 +9,11 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\Entity\Article;
+use AdminBundle\Entity\Categorie;
 use AdminBundle\Entity\Commentaire;
 use AdminBundle\Entity\Profil;
 use AdminBundle\Form\ArticleType;
+use AdminBundle\Form\CategorieType;
 use AdminBundle\Form\CommentaireType;
 use AdminBundle\Form\ProfilType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -31,17 +33,93 @@ class ViewsController extends Controller {
      * @Template("AdminBundle::accueil.html.twig")
      */
     public function accueil() {
-     
-    }
-    
-    /**
-     * @Route("/admin/categories")
-     * @Template("AdminBundle::categories.html.twig")
-     */
-    public function categories() {
         
     }
-    
+
+    /**
+     * @Route("/admin/categorie", name="categorie")
+     * @Template("AdminBundle::categories.html.twig")
+     */
+    public function categorie() {
+//        getRepository('AdminBundle:Categorie')findAll = "select * from Categorie"
+        return array("categorie" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll());
+    }
+
+    /**
+     * @Route("/admin/categorie/form", name="form")
+     * @Template("AdminBundle::ajouter.html.twig")
+     */
+    public function formCategorie() {
+//        on créé un nouveau formulaire pour les Categorie
+        $categorie = $this->createForm(CategorieType::class);
+        return array("formCategorie" => $categorie->createView());
+    }
+
+    /**
+     * @Route("/admin/categorie/valide", name="valide")
+     * @param Request $req
+     */
+    public function ajoutCategorie(Request $req) {
+//        on instancie un nouvelle objet categorie
+        $categorie = new Categorie();
+        $form = $this->createForm(CategorieType::class, $categorie);
+//        on verifie que c'est une requete de type POST
+        if ($req->getMethod() == 'POST') {
+            $form->handleRequest($req);
+            $em = $this->getDoctrine()->getManager();
+//            
+            $em->persist($categorie);
+//            on enregistre
+            $em->flush();
+            return $this->redirectToRoute('form');
+        }
+        return $this->redirectToRoute('categorie');
+    }
+
+    /**
+     * @Route("/admin/categorie/{id}", name="edit")
+     * @Template("AdminBundle::ajouter.html.twig")
+     */
+    public function editCategories($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+//        find('AdminBundle:Categorie', $id) == on cherche par id dans la table categorie 
+        $categorie = $em->find('AdminBundle:Categorie', $id);
+        $form = $this->createForm(CategorieType::class, $categorie);
+//        on créé une une a partir du formulaire pré-remplie avec l'id
+        return array("formCategorie" => $form->createView(), "id" => $id);
+    }
+
+    /**
+     * @Route("/admin/categorie/maj/{id}", name="maj")
+     * @param Request $req
+     */
+    public function majCategorie(Request $req, $id) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $categorie = $em->find('AdminBundle:Categorie', $id);
+        $biere = $this->createForm(CategorieType::class, $categorie);
+        if ($req->getMethod() == 'POST') {
+            $biere->handleRequest($req);
+            $em = $this->getDoctrine()->getEntityManager();
+//          on fusionne les entity categorie
+            $em->merge($categorie);
+            $em->flush();
+            return $this->redirect($this->generateUrl('maj'));
+        }
+        return $this->redirectToRoute('categorie');
+    }
+
+    /**
+     * @Route("/admin/categorie/supprimer/{id}", name="supp")
+     */
+    public function supprimerCategorie($id) {
+        $em = $this->getDoctrine()->getManager();
+        $categorie = $em->find("AdminBundle:Categorie", $id);
+//        on supprime la categorie
+        $em->remove($categorie);
+        $em->flush();
+        return $this->redirectToRoute('categorie');
+    }
+
     /**
      * @Route("/admin/detailsArticles")
      * @Template("AdminBundle::detailsArticles.html.twig")
@@ -49,6 +127,7 @@ class ViewsController extends Controller {
     public function detailsArticles() {
         
     }
+
 //    --------------PROFIL--------------
     /**
      * @Route("/{id}/profil", name="profil")
@@ -94,17 +173,17 @@ class ViewsController extends Controller {
 //  Si tout c'est bien passé, on redirige vers l'alias (le name)
 //  et on fait un array qui va servir de liaison pour la vue (cle => valeur)            
             return $this->redirect($this->generateUrl('profil', array(
-                'id'    =>  $prof->getId(),
-            ))
-                    );
+                                'id' => $prof->getId(),
+                            ))
+            );
         }
 //  array qui lit la vue (cle => valeur)
         return array(
-        'id'            => $profil->getId(),
-        'formProfil'    => $formProfil->createView()
+            'id' => $profil->getId(),
+            'formProfil' => $formProfil->createView()
         );
     }
-    
+
     /**
      * @Route("/ajouterProfil")
      * @Template("AdminBundle:profil:profilAjouter.html.twig")
@@ -115,7 +194,7 @@ class ViewsController extends Controller {
 //  donc on instancit un nouvel object
         $profil = new Profil();
         $formProfil = $this->createForm(ProfilType::class, $profil);
-        
+
         if ($request->getMethod() == 'POST') {
             $formProfil->handleRequest($request);
 //  Grace à la function / méthode "persist" on met les inforations
@@ -128,10 +207,10 @@ class ViewsController extends Controller {
         }
 //  Toujours le même principe, cle => valeur pour lié à la vue
         return array(
-            'formProfil'    => $formProfil->createView()
+            'formProfil' => $formProfil->createView()
         );
     }
-    
+
     /**
      * @Route("/{id}/supprimer", name="supprimerProfil")
      * @Template("AdminBundle:profil:profilSupprimer.html.twig")
@@ -141,11 +220,12 @@ class ViewsController extends Controller {
 //  On récupère par id pour supprimer par id dans la base de donnée
         $em = $this->getDoctrine()->getManager();
         $profil = $em->getRepository("AdminBundle:Profil")->findById($id);
-       
+
         return array(
-           'profil' => $profil,
-       );
+            'profil' => $profil,
+        );
     }
+
     /**
      * @Route("/{id}/delete", name="deleteProfil")
      * 
@@ -157,9 +237,10 @@ class ViewsController extends Controller {
 //  Puis flush pour sauvegarder l'information qui est stocké en mémoire
 //  Du coup on flush une suppression
         $em->flush();
-        
+
         return $this->redirect($this->generateUrl('adminHome'));
     }
+
 //    ------------ARTICLE--------------------
     /**
      * @Route("/home/article", name="articleHome")
@@ -168,6 +249,7 @@ class ViewsController extends Controller {
     public function articleHome() {
         return null;
     }
+
     /**
      * @Route("/{id}/article", name="article")
      * @Template("AdminBundle:article:article.html.twig")
@@ -176,10 +258,10 @@ class ViewsController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository("AdminBundle:Article")->findById($id);
         return array(
-           'article' => $article,
-       );
+            'article' => $article,
+        );
     }
-    
+
     /**
      * @Route("/article/ajouter", name="addArticle")
      * @Template("AdminBundle:article:articleAjouter.html.twig")
@@ -188,19 +270,19 @@ class ViewsController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $article = new Article();
         $formArticle = $this->createForm(ArticleType::class, $article);
-        
+        $article->setBrouillon(1);
         if ($request->getMethod() == 'POST') {
             $formArticle->handleRequest($request);
             $em->persist($article);
             $em->flush();
             return $this->redirect($this->generateUrl('articleHome'));
         }
-        
+
         return array(
-            'formArticle'    => $formArticle->createView()
+            'formArticle' => $formArticle->createView()
         );
     }
-    
+
     /**
      * @Route("/{id}/editer/article", name="articleEditer")
      * @Template("AdminBundle:article:articleEditer.html.twig")
@@ -210,22 +292,23 @@ class ViewsController extends Controller {
 
         $formArticle = $this->createForm(ArticleType::class, $article);
 
-        if($request->getMethod() == 'POST'){
+        if ($request->getMethod() == 'POST') {
             $formArticle->handleRequest($request);
             $a = $formArticle->getData();
             $em->merge($a);
             $em->flush();
-            
+
             return $this->redirect($this->generateUrl('article', array(
-                'id'    =>  $a->getId(),
-            ))
-                    );
+                                'id' => $a->getId(),
+                            ))
+            );
         }
         return array(
-        'id'            => $article->getId(),
-        'formArticle'    => $formArticle->createView()
+            'id' => $article->getId(),
+            'formArticle' => $formArticle->createView()
         );
     }
+
     /**
      * @Route("/{id}/articleDelete", name="articleDelete")
      * 
@@ -234,11 +317,12 @@ class ViewsController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $em->remove($article);
         $em->flush();
-        
+
         return $this->redirect($this->generateUrl('articleHome'));
     }
+
 //    -----------COMMENTAIRE----------------------
-    
+
     /**
      * @Route("/home/commentaire", name="commentaireHome")
      * @Template("AdminBundle:commentaire:commentaireHome.html.twig")
@@ -246,6 +330,7 @@ class ViewsController extends Controller {
     public function commentaireHome() {
         return null;
     }
+
     /**
      * @Route("/{id}/commentaire", name="commentaire")
      * @Template("AdminBundle:commentaire:commentaire.html.twig")
@@ -254,10 +339,10 @@ class ViewsController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $commentaire = $em->getRepository("AdminBundle:Commentaire")->findById($id);
         return array(
-           'commentaire' => $commentaire,
-       );
+            'commentaire' => $commentaire,
+        );
     }
-    
+
     /**
      * @Route("/commentaire/ajouter", name="addCommentaire")
      * @Template("AdminBundle:commentaire:commentaireAjouter.html.twig")
@@ -266,19 +351,19 @@ class ViewsController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $commentaire = new Commentaire();
         $formCommentaire = $this->createForm(CommentaireType::class, $commentaire);
-        
+
         if ($request->getMethod() == 'POST') {
             $formCommentaire->handleRequest($request);
             $em->persist($commentaire);
             $em->flush();
             return $this->redirect($this->generateUrl('commentaireHome'));
         }
-        
+
         return array(
-            'formCommentaire'    => $formCommentaire->createView()
+            'formCommentaire' => $formCommentaire->createView()
         );
     }
-    
+
     /**
      * @Route("/{id}/editer/commentaire", name="commentaireEditer")
      * @Template("AdminBundle:commentaire:commentaireEditer.html.twig")
@@ -288,22 +373,23 @@ class ViewsController extends Controller {
 
         $formCommentaire = $this->createForm(CommentaireType::class, $commentaire);
 
-        if($request->getMethod() == 'POST'){
+        if ($request->getMethod() == 'POST') {
             $formCommentaire->handleRequest($request);
             $c = $formCommentaire->getData();
             $em->merge($c);
             $em->flush();
-            
+
             return $this->redirect($this->generateUrl('commentaire', array(
-                'id'    =>  $c->getId(),
-            ))
-                    );
+                                'id' => $c->getId(),
+                            ))
+            );
         }
         return array(
-        'id'                    => $commentaire->getId(),
-        'formCommentaire'       => $formCommentaire->createView()
+            'id' => $commentaire->getId(),
+            'formCommentaire' => $formCommentaire->createView()
         );
     }
+
     /**
      * @Route("/{id}/commentaireDelete", name="commentaireDelete")
      * 
@@ -312,10 +398,9 @@ class ViewsController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $em->remove($commentaire);
         $em->flush();
-        
+
         return $this->redirect($this->generateUrl('commentaireHome'));
     }
-    
 
     /**
      * @Route("/admin/likesprofil")
@@ -324,12 +409,29 @@ class ViewsController extends Controller {
     public function likesProfil() {
         
     }
+
     
     /**
-     * @Route("/admin/article")
+     * @Route("/admin/articles")
      * @Template("AdminBundle::article.html.twig")
      */
     public function articleLol() {
+        
+    }
+    
+    /**
+     * @Route("/admin/articlesBrouillons")
+     * @Template("AdminBundle::articlesBrouillons.html.twig")
+     */
+    public function articleBrouillons() {
+        
+    }
+    
+        /**
+     * @Route("/admin/commentairess")
+     * @Template("AdminBundle::autreprofil.html.twig")
+     */
+    public function commentairesProfil() {
         
     }
 }

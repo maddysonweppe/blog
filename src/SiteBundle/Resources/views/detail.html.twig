@@ -4,21 +4,21 @@
 {% block body %}
     {% for article in article %}
 
-        <!-- Page Content -->
+        <!-- Contenu de la page -->
         <div class="container">
 
             <div class="row">
 
-                <!-- Blog Post Content Column -->
+                <!-- Les colonnes de la pages -->
                 <div class="col-lg-8">
 
-                    <!-- Blog Post -->
+                    <!-- le blog -->
 
-                    <!-- Title -->
+                    <!-- le titre -->
                     <h1>{{ article.titre }}</h1>
                     <h2>{{ article.categorie }}</h2>
 
-                    <!-- Author -->
+                    <!-- auteur -->
                     <p class="lead">
                         par <a href="#">Kirikou l'homme sombre</a>
                     </p>
@@ -30,22 +30,22 @@
 
                     <hr>
 
-                    <!-- Preview Image -->
+                    <!-- image article -->
                     <img class="img-responsive" src="{{ article.image }}" alt="">
 
                     <hr>
 
-                    <!-- Post Content -->
+                    <!-- contenu du post -->
                     <p class="lead">{{ article.texte }}</p>
 
                     <hr>
 
-                    <!-- Blog Comments -->
+                    <!-- commentaires du blog -->
 
-                    <!-- Comments Form -->
+                    <!-- formulaire de commentaires -->
                     <div class="well">
                         <h4>Laissez un commentaire:</h4>
-                        {#<form role="form">
+                      form role="form">
                             <div class="form-group">
                                 <textarea class="form-control" rows="3"></textarea>
                             </div>
@@ -88,7 +88,7 @@
                                 <small>le 19 octobre à 19 h 58</small>
                             </h4>
                             Je suis incroyablement surpris par les compétences de monsieur Leforestier, j'ai toujours vu le potentiel que d'autres sous-estimer et je suis heureux de voir qu'aujourd'hui celà est enfin payant pour lui, je lui souhaite une longue carrière au sein de la grande famille de la pétanque ! Amis du cochonnet salut !
-                            <!-- Nested Comment -->
+                            <!-- commentaire réponse -->
                             <div class="media">
                                 <a class="pull-left" href="#">
                                     <img class="media-object" src="http://placehold.it/64x64" alt="">
@@ -100,16 +100,16 @@
                                     Formidable quel personne exceptionnel 
                                 </div>
                             </div>
-                            <!-- End Nested Comment -->
+                            <!-- fin de commentaire réponse -->
                         </div>
                     </div>#}
 
                 </div>
 
-                <!-- Blog Sidebar Widgets Column -->
+                <!-- la colonne avec recherche + catégorie a droite -->
                 <div class="col-md-4">
 
-                    <!-- Blog Search Well -->
+                    <!-- la recherche blog a droite -->
                     <div class="well">
                         <h4>Recherche Blog</h4>
                         <div class="input-group">
@@ -123,7 +123,7 @@
                         <!-- /.input-group -->
                     </div>
 
-                    <!-- Blog Categories Well -->
+                    <!-- categories blog a droite -->
                     <div class="well">
                         <h4>Catégories du Blog</h4>
                         <div class="row">
@@ -155,7 +155,7 @@
                         <!-- /.row -->
                     </div>
 
-                    <!-- Side Widget Well -->
+                    <!-- dernière actu a droite -->
                     <div class="well">
                         <h4>Les dernières actus !</h4>
                         <p>Ici nous publierons les dernières actualités publiés par l'administrateur.</p>

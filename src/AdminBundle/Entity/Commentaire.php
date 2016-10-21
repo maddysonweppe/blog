@@ -144,5 +144,9 @@ class Commentaire
     function __construct() {
         $this->date = new \DateTime();
     }
+    public function __toString() {
+        return $this->getPseudo();
+    }
+
 }
 

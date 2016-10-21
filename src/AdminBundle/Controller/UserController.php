@@ -14,5 +14,5 @@ namespace AdminBundle\Controller;
  * @author maddyson
  */
 class UserController {
-    //put your code here
+    
 }

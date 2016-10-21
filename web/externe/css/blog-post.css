@@ -1,12 +1,12 @@
 body {
+    background-color: #E9EDF6;
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
 footer {
     margin: 50px 0;
 }
-
-// xxxxxxxxxxxx // css pour le main profil
+/* css pour le main profil*/
 
 .user-row {
     margin-bottom: 14px;
@@ -41,8 +41,8 @@ footer {
 .toppad
 {margin-top:20px;
 }
-///////////////////////////
-/////////////////////////// css pour les commentaires
+/* css pour les commentaires*/
+
 .thumbnail {
     padding:0px;
 }
@@ -70,4 +70,19 @@ footer {
 .panel>.panel-heading:before{
 	border-right-color:#ddd;
 	border-width:8px;
+}
+.article{
+    margin-top: -20px;
+    margin-left: -30px;
+    padding-left: 30px;
+    background-color: #FFF;
+    height: 325px;
+}
+.titre{
+    font-size: 2.2em;
+}
+.bliat{
+    margin-top: 20px;
+    text-align: justify;
+    margin-right: 30px;
 }
