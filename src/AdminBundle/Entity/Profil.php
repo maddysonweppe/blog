@@ -57,9 +57,10 @@ class Profil
     private $mdp;
 
     /**
-     * @var string
+     * @var UploadedFile
      *
      * @ORM\Column(name="avatar", type="string", length=255)
+     * @File(mimeTypes={"image"})
      */
     private $avatar;
 
@@ -279,5 +280,9 @@ class Profil
     {
         return $this->jaime;
     }
+    public function __toString() {
+        return $this->getPseudo();
+    }
+
 }
 

@@ -3,6 +3,8 @@
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints\File;
 
 /**
  * Article
@@ -10,8 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="article")
  * @ORM\Entity(repositoryClass="AdminBundle\Repository\ArticleRepository")
  */
-class Article
-{
+class Article {
+
     /**
      * @var int
      *
@@ -44,24 +46,26 @@ class Article
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="categorie", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Categorie")
+     * @ORM\JoinColumn(name="FK_categorie", referencedColumnName="id")
      */
     private $categorie;
 
     /**
-     * @var string
+     * @var UploadedFile
      *
      * @ORM\Column(name="image", type="string", length=255)
+     * @File(mimeTypes={"image"})
      */
     private $image;
+
     /**
      * @var bool
      *
      * @ORM\Column(name="brouillon", type="boolean")
      */
     private $brouillon;
-    
+
     function getBrouillon() {
         return $this->brouillon;
     }
@@ -70,14 +74,12 @@ class Article
         $this->brouillon = $brouillon;
     }
 
-    
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -88,8 +90,7 @@ class Article
      *
      * @return Article
      */
-    public function setDate($date)
-    {
+    public function setDate($date) {
         $this->date = $date;
 
         return $this;
@@ -100,8 +101,7 @@ class Article
      *
      * @return string
      */
-    public function getDate()
-    {
+    public function getDate() {
         return $this->date;
     }
 
@@ -112,8 +112,7 @@ class Article
      *
      * @return Article
      */
-    public function setTexte($texte)
-    {
+    public function setTexte($texte) {
         $this->texte = $texte;
 
         return $this;
@@ -124,8 +123,7 @@ class Article
      *
      * @return string
      */
-    public function getTexte()
-    {
+    public function getTexte() {
         return $this->texte;
     }
 
@@ -136,8 +134,7 @@ class Article
      *
      * @return Article
      */
-    public function setTitre($titre)
-    {
+    public function setTitre($titre) {
         $this->titre = $titre;
 
         return $this;
@@ -148,8 +145,7 @@ class Article
      *
      * @return string
      */
-    public function getTitre()
-    {
+    public function getTitre() {
         return $this->titre;
     }
 
@@ -160,8 +156,7 @@ class Article
      *
      * @return Article
      */
-    public function setCategorie($categorie)
-    {
+    public function setCategorie($categorie) {
         $this->categorie = $categorie;
 
         return $this;
@@ -172,8 +167,7 @@ class Article
      *
      * @return string
      */
-    public function getCategorie()
-    {
+    public function getCategorie() {
         return $this->categorie;
     }
 
@@ -184,8 +178,7 @@ class Article
      *
      * @return Article
      */
-    public function setImage($image)
-    {
+    public function setImage($image) {
         $this->image = $image;
 
         return $this;
@@ -196,9 +189,11 @@ class Article
      *
      * @return string
      */
-    public function getImage()
-    {
+    public function getImage() {
         return $this->image;
     }
-}
+    public function __toString() {
+        return $this->getTitre();
+    }
 
+}

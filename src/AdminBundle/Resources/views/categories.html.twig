@@ -1,1 +1,11 @@
-categories{# empty Twig template #}
+<a href="{{path("form")}}">Ajouter une catégorie</a>
+{%for cat in categorie %}
+    <p>{{cat.nom}}</p>
+{#    {% set checked %}#}
+    <input type="checkbox">
+{#    {% endset %}#}
+    <a href="{{path("edit",{"id":cat.id})}}">Modifier</a>
+{% endfor %}
+
+{#{% endif %}#}
+{#<a href="{{path("supp",{"id":cat.id})}}">Supprimer</a>#}

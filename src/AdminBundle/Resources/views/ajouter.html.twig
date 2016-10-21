@@ -1,0 +1,8 @@
+<div class="header">
+    {% if id is defined %}
+        {{form_start(formCategorie,{'attr':{'action':path('maj',{'id':id})}})}}
+    {% else%}
+        {{form_start(formCategorie,{'attr':{'action':path('valide')}})}}
+    {%endif%}
+    {{form_end(formCategorie)}}
+</div>

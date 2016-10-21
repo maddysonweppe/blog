@@ -138,5 +138,9 @@ class Commentaire
     {
         return $this->pseudo;
     }
+    public function __toString() {
+        return $this->getPseudo();
+    }
+
 }
 
