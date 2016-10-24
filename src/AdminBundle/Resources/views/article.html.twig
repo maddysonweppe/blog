@@ -2,52 +2,41 @@
 
 
 {% block body %}
-
-
-
-
     <h3> créer un article </h3>
     <div class="form-group">
-  <label for="sel1">Catégories</label>
-  <select class="form-control" id="sel1">
-    <option>Football</option>
-    <option>Rugby</option>
-    <option>Tennis</option>
-    <option>eSport</option>
-  </select>
-  
+        <label for="sel1">Catégories</label>
+        <select class="form-control" id="sel1">
+            <option>Football</option>
+            <option>Rugby</option>
+            <option>Tennis</option>
+            <option>eSport</option>
+        </select>
+
+    </div>
+
+    <button type="submit" class="btn">Ajout photo</button>
+    <h1> titre de l'article </h1>
+    <input type="text" class="form-control">
+
+    <span class="input-group-btn">
+
+        <span class="glyphicon glyphicon-search"></span>
+    </button>
+</span>
 </div>
-    
-                            <button type="submit" class="btn">Ajout photo</button>
-                            <h1> titre de l'article </h1>
-                          <input type="text" class="form-control">
-                          
-                        <span class="input-group-btn">
-                            
-                                <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
-                    </div>
-                            
-                            <!-- creation d'article -->
-                <div class="well">
-                    <h4>Texte de l'article:</h4>
-                    <form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Envoyez</button>
-                        <button type="submit" class="btn btn-primary">Brouillon</button>
-                    </form>
-                </div>
 
-                <hr>
+<!-- creation d'article -->
+<div class="well">
+    <h4>Texte de l'article:</h4>
+    <form role="form">
+        <div class="form-group">
+            <textarea class="form-control" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Envoyez</button>
+        <button type="submit" class="btn btn-primary">Brouillon</button>
+    </form>
+</div>
 
+<hr>
 
-
-
-
-
-
-    
 {% endblock %}

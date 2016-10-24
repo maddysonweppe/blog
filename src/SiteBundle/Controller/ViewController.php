@@ -2,7 +2,6 @@
 
 namespace SiteBundle\Controller;
 
-use AdminBundle\Entity\Article;
 use AdminBundle\Entity\Commentaire;
 use AdminBundle\Form\CommentaireType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -17,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ViewController extends Controller {
      /**
-     * @Route("/home")
+     * @Route("/", name="home")
      * @Template("SiteBundle::generale.html.twig")
      */
     public function indexHome()
@@ -35,7 +34,7 @@ class ViewController extends Controller {
     }
     
      /**
-     * @Route("/login")
+     * @Route("/login", name="login")
      * @Template("SiteBundle::connexion.html.twig")
      */
     public function indexLog()
