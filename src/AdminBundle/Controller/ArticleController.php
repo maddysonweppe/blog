@@ -9,7 +9,9 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\Entity\Article;
+use AdminBundle\Entity\Commentaire;
 use AdminBundle\Form\ArticleType;
+use AdminBundle\Form\CommentaireType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -29,18 +31,6 @@ class ArticleController extends Controller {
      */
     public function articleHome() {
         return null;
-    }
-
-    /**
-     * @Route("/{id}/article", name="article")
-     * @Template("AdminBundle:article:article.html.twig")
-     */
-    public function article($id) {
-        $em = $this->getDoctrine()->getManager();
-        $article = $em->getRepository("AdminBundle:Article")->findById($id);
-        return array(
-            'article' => $article,
-        );
     }
 
     /**

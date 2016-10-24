@@ -3,7 +3,7 @@
 
     <!-- Page Content -->
     <div class="container">
-
+        {% for article in article %}
         <div class="row">
 
             <!-- Blog Post Content Column -->
@@ -35,7 +35,7 @@
                                 Etiam quis tristique lectus.
                                 Aliquam in arcu eget velit pulvinar dict vel in justo.
                                 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
-                            <a href="{#{{path('idDetail',{'id':article.id})}}#}">
+                            <a href="{{ path('idDetail', {'id':article.id}) }}">
                                 en voir +
                             </a>
                         </div>
@@ -43,6 +43,7 @@
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
     <!-- /.row -->
 
