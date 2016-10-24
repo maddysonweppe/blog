@@ -71,6 +71,11 @@ class ProfilController extends Controller {
                                 'id' => $prof->getId(),
                             ))
             );
+//            return $this->redirect($this->generateUrl('profil', array(
+//                                'id' => $prof->getId(),
+//                                'profil' => $this->getRepository("AdminBundle:Profil")->findById($profil),
+//                            ))
+//            );
         }
 //  array qui lit la vue (cle => valeur)
         return array(

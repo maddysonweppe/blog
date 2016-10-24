@@ -76,7 +76,7 @@ class Profil
     /**
      * @var array
      *
-     * @ORM\Column(name="jaime", type="array")
+     * @ORM\Column(name="jaime", type="array", nullable=true)
      */
     private $jaime;
 

@@ -2,6 +2,7 @@
 
 namespace SiteBundle\Controller;
 
+use AdminBundle\Entity\Article;
 use AdminBundle\Entity\Commentaire;
 use AdminBundle\Form\CommentaireType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,7 +19,6 @@ class ViewController extends Controller {
 
     /**
      * @Route("/", name="home")
-     * @Template("SiteBundle::generale.html.twig")
      */
     public function indexHome() {
         return $this->render('SiteBundle::generale.html.twig', array(
@@ -59,8 +59,8 @@ class ViewController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $article = $em->getRepository("AdminBundle:Article")->findById($id);
-        $allCommentaire = $em->getRepository("AdminBundle:Commentaire")->findAll();
-
+        $allCommentaire = $em->getRepository("AdminBundle:Commentaire")->findByArticle($id);
+        
         $commentaire = new Commentaire();
         $formCommentaire = $this->createForm(CommentaireType::class, $commentaire);
 
@@ -69,22 +69,6 @@ class ViewController extends Controller {
             'commentaire' => $allCommentaire,
             'formCommentaire' => $formCommentaire->createView(),
         );
-    }
-
-    /**
-     * 
-     * @Route("/saveCommentaire", name="sauvegardeCommentaire")
-     */
-    public function saveCommentaire(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $commentaire = new Commentaire();
-        $formCommentaire = $this->createForm(CommentaireType::class, $commentaire);
-
-
-        $formCommentaire->handleRequest($request);
-        $em->persist($commentaire);
-        $em->flush();
-        return $this->redirect($this->generateUrl('commentaireHome'));
     }
 
 }
