@@ -33,6 +33,12 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
+                        {#                        Boucle sur chaque élément pour afficher une liste de categorie prévus dans une variable appelée categories #}
+                        {% for categorie in categories %}
+                            <li>
+                                <a href="{{path('categorie',{'categories':categorie.nom})}}">{{categorie.nom}}</a>
+                            </li>
+                        {% endfor %}
                         {#                        <li>
                                                     <a href="#">Football</a>
                                                 </li>
@@ -63,7 +69,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            
+
                         </li>
 
                     </ul>
