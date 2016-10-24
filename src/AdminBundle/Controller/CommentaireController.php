@@ -8,6 +8,7 @@
 
 namespace AdminBundle\Controller;
 
+use AdminBundle\Entity\Article;
 use AdminBundle\Entity\Commentaire;
 use AdminBundle\Form\CommentaireType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -44,19 +45,23 @@ class CommentaireController extends Controller {
     }
 
     /**
-     * @Route("/commentaire/ajouter", name="addCommentaire")
-     * @Template("AdminBundle:commentaire:commentaireAjouter.html.twig")
+     * @Route("/commentaire/ajouter/{id}", name="addCommentaire")
      */
-    public function commentaireAjouter(Request $request) {
+    public function commentaireAjouter(Request $request, Article $article) {
         $em = $this->getDoctrine()->getManager();
         $commentaire = new Commentaire();
         $formCommentaire = $this->createForm(CommentaireType::class, $commentaire);
-
+        
         if ($request->getMethod() == 'POST') {
             $formCommentaire->handleRequest($request);
+            
+            $commentaire->setArticle($article);
+            
             $em->persist($commentaire);
             $em->flush();
-            return $this->redirect($this->generateUrl('commentaireHome'));
+            return $this->redirect($this->generateUrl('idDetail',array(
+                'id' => $article->getId(),
+            )));
         }
 
         return array(
@@ -101,5 +106,25 @@ class CommentaireController extends Controller {
 
         return $this->redirect($this->generateUrl('commentaireHome'));
     }
+//    
+//    /**
+//     * 
+//     * @Route("/saveCommentaire", name="sauvegardeCommentaire")
+//     */
+//    public function saveCommentaire(Request $request){
+//        $em = $this->getDoctrine()->getManager();
+//        $commentaire = new Commentaire();
+//        
+//        $formCommentaire = $this->createForm(CommentaireType::class, $commentaire);
+//        
+//      
+//        
+//        $formCommentaire->handleRequest($request);
+//        
+//        $em->persist($commentaire);
+//        $em->flush();
+//        
+//        return $this->redirect($this->generateUrl('commentaireHome'));
+//    }
 
 }
