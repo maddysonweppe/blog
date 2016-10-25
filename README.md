@@ -23,7 +23,7 @@ Etape à suivre pour installer le projet "BLOG" après l'avoir téléchargé:
 3. paramétrer le fichier parameters.yml 
 4. mettre à jour votre base de données 
 5. mettre les droits au dossier nouvellement créé
-6. il faut créer / pousser les entities dans votre base de données via le terminal avec la commande:
+6. il faut créer / pousser les entities dans votre base de données via le terminal avec la commande:  
 php bin/console doctrine:schema:create
 7. Projet FONCTIONNEL, vous pouvez commencer à naviguer!  
 ATTENTION, vos entities dans la base de données sont vierges, cela impacte forcément la vue.
