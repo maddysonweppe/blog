@@ -69,6 +69,7 @@ class ProfilController extends Controller {
 //  et on fait un array qui va servir de liaison pour la vue (cle => valeur)            
             return $this->redirect($this->generateUrl('profil', array(
                                 'id' => $prof->getId(),
+                                "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
                             ))
             );
 //            return $this->redirect($this->generateUrl('profil', array(
@@ -80,7 +81,8 @@ class ProfilController extends Controller {
 //  array qui lit la vue (cle => valeur)
         return array(
             'id' => $profil->getId(),
-            'formProfil' => $formProfil->createView()
+            'formProfil' => $formProfil->createView(),
+            "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
         );
     }
 
@@ -113,11 +115,12 @@ class ProfilController extends Controller {
 //  Puis on flush qui va sauvegarder en base de donnée
             $em->flush();
 //  je retourne une redirection vers la vue que je veux via l'alias
-            return $this->redirect($this->generateUrl('profil'));
+            return $this->redirect($this->generateUrl('connexion'));
         }
 //  Toujours le même principe, cle => valeur pour lié à la vue
         return array(
-            'formProfil' => $formProfil->createView()
+            'formProfil' => $formProfil->createView(),
+            "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
         );
     }
 
@@ -148,7 +151,7 @@ class ProfilController extends Controller {
 //  Du coup on flush une suppression
         $em->flush();
 
-        return $this->redirect($this->generateUrl('adminHome'));
+        return $this->redirect($this->generateUrl('home'));
     }
 
 }

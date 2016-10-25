@@ -8,11 +8,24 @@
 
 namespace AdminBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 /**
  * Description of LoginController
  *
  * @author maddyson
  */
-class LoginController {
-    //put your code here
+class LoginController extends Controller{
+
+    /**
+     * @Route("/connexion", name="connexion")
+     */
+    public function indexLog() {
+
+        return $this->render('SiteBundle::connexion.html.twig', array(
+                    "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+        ));
+    }
+
 }

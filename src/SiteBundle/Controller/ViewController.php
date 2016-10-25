@@ -37,17 +37,7 @@ class ViewController extends Controller {
 //            getRepository('AdminBundle:Categorie')->findAll() = select * from Categorie
                     "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
 //            getRepository('AdminBundle:Article')->findByCategorie($id, array("date"=>"desc"))= select * from Article where Categorie = $id order by date DESC
-                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findByCategorie($id, array("date"=>"desc")),
-        ));
-    }
-
-    /**
-     * @Route("/login", name="login")
-     */
-    public function indexLog() {
-        
-        return $this->render('SiteBundle::connexion.html.twig', array(
-                    "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findByCategorie($id, array("date" => "desc")),
         ));
     }
 
@@ -60,7 +50,7 @@ class ViewController extends Controller {
 
         $article = $em->getRepository("AdminBundle:Article")->findById($id);
         $allCommentaire = $em->getRepository("AdminBundle:Commentaire")->findByArticle($id);
-        
+
         $commentaire = new Commentaire();
         $formCommentaire = $this->createForm(CommentaireType::class, $commentaire);
 
@@ -68,6 +58,7 @@ class ViewController extends Controller {
             'article' => $article,
             'commentaire' => $allCommentaire,
             'formCommentaire' => $formCommentaire->createView(),
+            "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
         );
     }
 
