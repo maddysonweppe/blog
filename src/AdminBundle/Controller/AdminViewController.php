@@ -79,6 +79,15 @@ class AdminViewController extends Controller {
 //                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date"=>"desc")),
         ));
     }
+    /**
+     * @Route("/admin/{id}/profil/mesArticles", name="mesArticles")
+     */
+    public function article() {
+        return $this->render('SiteBundle::generale.html.twig', array(
+                    "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date"=>"desc")),
+        ));
+    }
 
     /**
      * @Route("/admin/{id}/profil/commentaires", name="mesComs")

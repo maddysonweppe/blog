@@ -35,14 +35,15 @@ class ArticleController extends Controller {
 
     /**
      * @Route("/article/ajouter", name="addArticle")
-     * @Template("AdminBundle:article:articleAjouter.html.twig")
+     * @Template("AdminBundle::article.html.twig")
      */
     public function articleAjouter(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $article = new Article();
         $formArticle = $this->createForm(ArticleType::class, $article);
-        $article->setBrouillon(1);
+        
         if ($request->getMethod() == 'POST') {
+            $article->setBrouillon(1);
             $formArticle->handleRequest($request);
             $em->persist($article);
             $em->flush();
@@ -50,7 +51,8 @@ class ArticleController extends Controller {
         }
 
         return array(
-            'formArticle' => $formArticle->createView()
+            'formArticle' => $formArticle->createView(),
+            "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
         );
     }
 

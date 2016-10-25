@@ -10,7 +10,7 @@
                     <div class="panel-title">Ajout et suppression des catégories</div>
 
                 </div>     
-
+                {{form_start(formCategorie,{'attr':{'action':path('valide')}})}}
                 <div style="padding-top:30px" class="panel-body" >
 
                     <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
@@ -21,19 +21,24 @@
 
                         <div style="margin-bottom: 25px" class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
-                            <input id="login-password" type="text" class="form-control" name="categorie" placeholder="ajoutez une catégorie">
+                            {{form_row(formCategorie.nom,{'attr':{'class':'form-control','placeholder':'ajoutez une catégorie'}})}}
                         </div>
 
 
 
                         <div class="input-group">
                             <div class="checkbox">
-                                {% for categorie in categories %}
-                                    <label><input id="login-remember" type="checkbox" name="remember" value="{{categorie.nom}}">{{categorie.nom}}</label><br/>
-                       {#             <label><input id="login-remember" type="checkbox" name="remember" value="Rugby" checked>Football</label><br/>
-                                    <label><input id="login-remember" type="checkbox" name="remember" value="Tennis" checked>Football</label><br/>
-                                    <label><input id="login-remember" type="checkbox" name="remember" value="eSport" checked></label><br/>#}
+                                <ul>
+                                    {% for categorie in categories %}
+                                        <li style="list-style-type: none">
+                                            <a id="btn-login" style="margin-bottom:10px" href="{{path('supp', {'id':categorie.id})}}" class="btn btn-danger">Supprimez {{categorie.nom}}</a>
+                                            {#                                        <a id="btn-login" style="margin-bottom:10px" href="{{path('supp', {'id':categorie.id})}}" class="btn btn-danger">Supprimez {{categorie.nom}}</a>#}
+                                        </li>
+                                        {#             <label><input id="login-remember" type="checkbox" name="remember" value="Rugby" checked>Football</label><br/>
+                                                     <label><input id="login-remember" type="checkbox" name="remember" value="Tennis" checked>Football</label><br/>
+                                                     <label><input id="login-remember" type="checkbox" name="remember" value="eSport" checked></label><br/>#}
                                     {% endfor %}
+                                </ul>
                             </div>
                         </div> 
 
@@ -42,15 +47,13 @@
                             <!-- Button -->
 
                             <div class="col-sm-12 controls">
-                                <a id="btn-login" href="{{path('valide')}}" class="btn btn-success">Ajoutez</a>
-                                <a id="btn-login" href="{#{{path('')}}#}" class="btn btn-danger">Supprimez selection</a>
-
-
+                                <input type="submit" class="btn btn-success" value="Ajoutez">
                             </div>
                         </div>
-                    </form>     
-                </div>                     
-            </div>  
+                        {{form_end(formCategorie)}}
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

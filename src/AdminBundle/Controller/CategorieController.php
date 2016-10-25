@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
 class CategorieController extends Controller {
 
     /**
-     * @Route("/admin/{id}/profil/categorie", name="category")
+     * @Route("/admin/categorie", name="category")
      * @Template("AdminBundle::categories.html.twig")
      */
     public function categorie() {
@@ -65,9 +65,9 @@ class CategorieController extends Controller {
             $em->persist($categorie);
 //            on enregistre
             $em->flush();
-            return $this->redirectToRoute('categorie');
+            return $this->redirectToRoute('category');
         }
-        return $this->redirectToRoute('categorie');
+        return $this->redirectToRoute('category');
     }
 
     /**
@@ -90,16 +90,16 @@ class CategorieController extends Controller {
     public function majCategorie(Request $req, $id) {
         $em = $this->getDoctrine()->getEntityManager();
         $categorie = $em->find('AdminBundle:Categorie', $id);
-        $biere = $this->createForm(CategorieType::class, $categorie);
+        $form = $this->createForm(CategorieType::class, $categorie);
         if ($req->getMethod() == 'POST') {
-            $biere->handleRequest($req);
+            $form->handleRequest($req);
             $em = $this->getDoctrine()->getEntityManager();
 //          on fusionne les entity categorie
             $em->merge($categorie);
             $em->flush();
-            return $this->redirect($this->generateUrl('categorie'));
+            return $this->redirect($this->generateUrl('category'));
         }
-        return $this->redirectToRoute('categorie');
+        return $this->redirectToRoute('category');
     }
 
     /**
@@ -111,7 +111,7 @@ class CategorieController extends Controller {
 //        on supprime la categorie
         $em->remove($categorie);
         $em->flush();
-        return $this->redirectToRoute('categorie');
+        return $this->redirectToRoute('category');
     }
 
 }

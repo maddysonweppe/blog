@@ -4,24 +4,25 @@
 {% block body %}
     <h3> créer un article </h3>
     <div class="form-group">
-        <label for="sel1">Catégories</label>
-        <select class="form-control" id="sel1">
-            <option>Football</option>
-            <option>Rugby</option>
-            <option>Tennis</option>
-            <option>eSport</option>
-        </select>
+        {{form_start(formArticle,{'attr':{'action':path('valide')}})}}
 
     </div>
+   
 
-    <button type="submit" class="btn">Ajout photo</button>
-    <h1> titre de l'article </h1>
-    <input type="text" class="form-control">
+    <label for="sel1">Catégories</label>
+        {{ form_row(formArticle.categorie,{'attr':{'class' : 'form-control'}})}}
+</div>
+ 
+<button type="submit" class="btn">Ajout photo {{ form_row(formArticle.image)}}
+</button>
+<h1> titre de l'article     {{ form_row(formArticle.valider,{'attr':{'class' : 'btn btn-primary'}}) }}
+</h1>
+<input type="text" class="form-control">
 
-    <span class="input-group-btn">
+<span class="input-group-btn">
 
-        <span class="glyphicon glyphicon-search"></span>
-    </button>
+    <span class="glyphicon glyphicon-search"></span>
+</button>
 </span>
 </div>
 
@@ -31,9 +32,15 @@
     <form role="form">
         <div class="form-group">
             <textarea class="form-control" rows="3"></textarea>
+            {{ form_row(formArticle.texte,{'attr':{'class' : 'form-control', 'rows': 3}}) }}
+
         </div>
         <button type="submit" class="btn btn-primary">Envoyez</button>
         <button type="submit" class="btn btn-primary">Brouillon</button>
+             {{ form_row(formArticle.valider,{'attr':{'class' : 'btn btn-primary'}}) }}
+
+        {{form_end(formArticle)}}
+
     </form>
 </div>
 
