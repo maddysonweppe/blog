@@ -11,3 +11,24 @@ $(function(){
     }
   });
 });
+
+
+//FONCTION DE CONNEXION
+
+//OUVRIR  L'ONGLET DE CONNEXION 
+function openNav(section) {
+  if (section==1){
+    document.getElementById("login").style.width = "100%";
+  }
+
+
+}
+
+//FERMER L'ONGLET DE CONNEXION
+function closeNav(section) {
+  if (section==1){
+    document.getElementById("login").style.width = "0";
+  }
+}
+
+
