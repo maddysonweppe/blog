@@ -3,6 +3,7 @@
 namespace AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +20,7 @@ class ProfilType extends AbstractType
                 ->add('prenom')
                 ->add('email')
                 ->add('mdp')
-                ->add('avatar')
+                ->add('avatar', FileType::class, array('data_class' => null))
                 ->add('role')
                 ->add('jaime')
                 ->add('valider',SubmitType::class)        ;

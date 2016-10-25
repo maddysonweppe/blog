@@ -28,42 +28,66 @@ class AdminViewController extends Controller {
 //    }
 
     /**
+     * @Route("/template", name="template")
+     */
+    public function template() {
+
+        return $this->render('template.html.twig', array(
+                    "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+//                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date"=>"desc")),
+        ));
+    }
+
+    /**
      * @Route("/admin/{id}/profil/detailsArticles")
      * @Template("AdminBundle::detailsArticles.html.twig")
      */
     public function detailsArticles() {
-        
+        return $this->render('detailsArticles.html.twig', array(
+                    "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+//                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date"=>"desc")),
+        ));
     }
 
     /**
      * @Route("/admin/{id}/profil/likesprofil", name="mesLikes")
-     * @Template("AdminBundle::likes.html.twig")
+     * @Template(".html.twig")
      */
     public function likesProfil() {
-        
+        return $this->render('AdminBundle::likes.html.twig', array(
+                    "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+//                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date"=>"desc")),
+        ));
     }
-    
+
     /**
      * @Route("/admin/{id}/profil/articles", name="mesArticles")
-     * @Template("AdminBundle::article.html.twig")
      */
     public function articleLol() {
-        
+        return $this->render('AdminBundle::article.html.twig', array(
+                    "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+//                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date"=>"desc")),
+        ));
     }
-    
+
     /**
      * @Route("/admin/{id}/profil/articlesBrouillons", name="mesBrouillons")
-     * @Template("AdminBundle::articlesBrouillons.html.twig")
      */
     public function articleBrouillons() {
-        
+        return $this->render('AdminBundle::articlesBrouillons.html.twig', array(
+                    "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+//                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date"=>"desc")),
+        ));
     }
-    
-        /**
+
+    /**
      * @Route("/admin/{id}/profil/commentaires", name="mesComs")
-     * @Template("AdminBundle::autreprofil.html.twig")
      */
     public function commentairesProfil() {
-        
+        return $this->render('AdminBundle::autreprofil.html.twig', array(
+                    "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+//                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date"=>"desc")),
+        ));
     }
+
 }

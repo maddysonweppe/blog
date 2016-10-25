@@ -11,6 +11,8 @@
 
                 <!-- Blog Post Content Column -->
                 <div class="col-lg-8">
+                    
+                    
 
                     <!-- Blog Post -->
 
@@ -51,19 +53,20 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Envoyez</button>
                         </form>#}
-                        {{form_start(formCommentaire,{'attr':{'action':path('sauvegardeCommentaire')}})}}
+                        {{form_start(formCommentaire,{'attr':{'action':path('addCommentaire', {'id':article.id})}})}}
                         <div class="form-group">
-                        {{ form_row(formCommentaire.texte,{'attr':{'class' : 'form-control'}}) }}
+                            {{ form_row(formCommentaire.texte,{'attr':{'class' : 'form-control'}}) }}
                         </div>
                         {{ form_row(formCommentaire.pseudo) }}
                         {{ form_row(formCommentaire.valider,{'attr':{'class' : 'btn btn-primary'}}) }}
-                     
+
                         {{form_end(formCommentaire)}}
+ 
                     </div>
 
                     <hr>
 
-                   
+
                     <!-- Comment -->
                     {% for commentaire in commentaire %}
                     <div class="media">
@@ -71,12 +74,16 @@
                             <img class="media-object" src="http://placehold.it/64x64" alt="">
                         </a>
                         <div class="media-body">
+                            
                             <h4 class="media-heading">{{ commentaire.pseudo }}
                                 <small><time>{{ commentaire.date|date('d M Y') }}</time></small>
+                                <div id="holder">
+<div class="box entypo-thumbs-up"> Like</div>
+</div>
+                                
                             </h4>
                             {{ commentaire.texte }}
                         </div>
-                    </div>
                     {% endfor %}
                     <!-- Comment -->
                     {#<div class="media">
@@ -127,30 +134,29 @@
                     <div class="well">
                         <h4>Catégories du Blog</h4>
                         <div class="row">
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled">
-                                    <li><a href="#">Première catégorie</a>
-                                    </li>
-                                    <li><a href="#">Deuxième catégorie</a>
-                                    </li>
-                                    <li><a href="#">Troisième catégorie</a>
-                                    </li>
-                                    <li><a href="#">Quatrième catégorie</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled">
-                                    <li><a href="#">Première catégorie</a>
-                                    </li>
-                                    <li><a href="#">Deuxième catégorie</a>
-                                    </li>
-                                    <li><a href="#">Troisième catégorie</a>
-                                    </li>
-                                    <li><a href="#">Quatrième catégorie</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            {% for categorie in categories %}
+                                {#on boucle sur categorie si il est pair alors il est mis dans la colone de gauche#}
+                                {% if loop.index is divisibleby(2) %}
+                                    <div class="col-lg-6">
+                                        <ul class="list-unstyled">
+
+                                            <li>
+                                                <a href="{{path('categorie',{'categories':categorie.nom})}}">{{categorie.nom}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    {# sinon il est mis dans la colone de gauche#}
+                                {% else %}
+                                    <div class="col-lg-6">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <a href="{{path('categorie',{'categories':categorie.nom})}}">{{categorie.nom}}</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                         <!-- /.row -->
                     </div>

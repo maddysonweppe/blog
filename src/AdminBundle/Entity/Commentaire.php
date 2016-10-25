@@ -47,11 +47,26 @@ class Commentaire
     /**
      * @var array
      *
-     * @ORM\Column(name="jaime", type="array")
+     * @ORM\Column(name="jaime", type="array", nullable=true)
      */
     private $jaime;
     
-    function getJaime() {
+    /**
+     * @var string
+     * @ORM\ManyToOne(targetEntity="Article")
+     * @ORM\JoinColumn(name="fk_article", referencedColumnName="id")
+     */
+    private $article;
+    
+    function getArticle() {
+        return $this->article;
+    }
+
+    function setArticle($article) {
+        $this->article = $article;
+    }
+
+        function getJaime() {
         return $this->jaime;
     }
 
@@ -144,6 +159,7 @@ class Commentaire
     function __construct() {
         $this->date = new \DateTime();
     }
+    
     public function __toString() {
         return $this->getPseudo();
     }

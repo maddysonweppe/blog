@@ -1,9 +1,19 @@
 {% extends "::template.html.twig" %}
 {% block body %}
-
+<div class="container">
+	<div class="row">
+		<div class="page-header">
+          <h1>Blog de JSAIPAKi</h1>
+          <span class="icon-bar">
+            <i class="glyphicon glyphicon-tower" aria-hidden="true"></i>
+          </span>
+          <h2>Articles Récents</h2>
+        </div>
+	</div>
+</div>
     <!-- Page Content -->
     <div class="container">
-
+        {% for article in articles %}
         <div class="row">
 
             <!-- Blog Post Content Column -->
@@ -35,7 +45,7 @@
                                 Etiam quis tristique lectus.
                                 Aliquam in arcu eget velit pulvinar dict vel in justo.
                                 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
-                            <a href="{#{{path('idDetail',{'id':article.id})}}#}">
+                            <a href="{{ path('idDetail', {'id':article.id}) }}">
                                 en voir +
                             </a>
                         </div>
@@ -43,29 +53,9 @@
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
     <!-- /.row -->
-
-
-
-</div>
-</div>
-
-</div>
-<!-- /.row -->
-</div>
-
-</div>
-
-</div>
-<!-- /.row -->
-
-
-
-
-
-</div>
-<!-- /.container -->
 
 
 {% endblock %}

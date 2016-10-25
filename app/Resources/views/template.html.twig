@@ -33,6 +33,12 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
+                        {#                        Boucle sur chaque élément pour afficher une liste de categorie prévus dans une variable appelée categories #}
+                        {% for categorie in categories %}
+                            <li>
+                                <a href="{{path('categorie',{'categories':categorie.nom})}}">{{categorie.nom}}</a>
+                            </li>
+                        {% endfor %}
                         {#                        <li>
                                                     <a href="#">Football</a>
                                                 </li>
@@ -46,7 +52,7 @@
                                                     <a href="#">eSport</a>
                                                 </li>#}
                         <li>
-                            <a href="{{path('login')}}" class="btn btn-success" style=color:white;>Connexion</a>
+                            <a href="{{path('connexion')}}" class="btn btn-success" style=color:white;>Connexion</a>
                         </li>
                         <li>
                             <div class="dropdown">
@@ -63,7 +69,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            
+
                         </li>
 
                     </ul>
@@ -74,7 +80,36 @@
         </nav>
     {% block body %}{% endblock %}
     <!-- /footer -->
-
+        <div class="footer-dark">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-push-6 item text">
+                        <h3>Certif Blog</h3>
+                        <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
+                    </div>
+                    <div class="col-md-3 col-md-pull-6 col-sm-4 item">
+                        <h3>Categories </h3>
+                        <ul>
+                            <li><a href="#">tennis </a></li>
+                            <li><a href="#">ping pong</a></li>
+                            <li><a href="#">poney </a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-md-pull-6 col-sm-4 item">
+                        <h3>A propos de nous</h3>
+                        <ul>
+                            <li><a href="#">on est bo</a></li>
+                            <li><a href="#">ki on est?</a></li>
+                            <li><a href="#">combien on vend?</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-12 col-sm-4 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+                </div>
+                <p class="copyright">Certif Blog© 2016</p>
+            </div>
+        </footer>
+    </div>
     <!-- /footer -->
     <!-- jQuery -->
     <script src="{{ asset('../vendor/twbs/bootstrap/js/tests/vendor/jquery.min.js') }}"></script>
@@ -83,7 +118,7 @@
     <script src="{{ asset('../vendor/twbs/bootstrap/dist/js/bootstrap.js') }}"></script>
 
     <!-- Own JavaScript -->
-    <script src="{{ asset('../web/externe/js/script.js') }}"></script>
+    <script src="{{ asset('externe/js/script.js') }}"></script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>

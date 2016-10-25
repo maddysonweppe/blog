@@ -28,10 +28,12 @@
 
                         <div class="input-group">
                             <div class="checkbox">
-                                    <label><input id="login-remember" type="checkbox" name="remember" value="Football" checked>Football</label><br/>
-                                    <label><input id="login-remember" type="checkbox" name="remember" value="Rugby" checked>Football</label><br/>
+                                {% for categorie in categories %}
+                                    <label><input id="login-remember" type="checkbox" name="remember" value="{{categorie.nom}}">{{categorie.nom}}</label><br/>
+                       {#             <label><input id="login-remember" type="checkbox" name="remember" value="Rugby" checked>Football</label><br/>
                                     <label><input id="login-remember" type="checkbox" name="remember" value="Tennis" checked>Football</label><br/>
-                                    <label><input id="login-remember" type="checkbox" name="remember" value="eSport" checked></label><br/>
+                                    <label><input id="login-remember" type="checkbox" name="remember" value="eSport" checked></label><br/>#}
+                                    {% endfor %}
                             </div>
                         </div> 
 

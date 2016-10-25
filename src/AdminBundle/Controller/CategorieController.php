@@ -23,19 +23,21 @@ use Symfony\Component\HttpFoundation\Request;
 class CategorieController extends Controller {
 
     /**
-     * @Route("/admin/categorie", name="categorie")
+     * @Route("/admin/{id}/profil/categorie", name="category")
      * @Template("AdminBundle::categories.html.twig")
      */
     public function categorie() {
 //        getRepository('AdminBundle:Categorie')findAll = "select * from Categorie"
         $categorie = $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll();
-       
+//        "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
         //        on créé un nouveau formulaire pour les Categorie
         $formCategorie = $this->createForm(CategorieType::class);
-        return array("formCategorie" => $formCategorie->createView(),
-            "categorie" => $categorie
+        return array(
+            "formCategorie" => $formCategorie->createView(),
+            "categories" => $categorie,
         );
     }
+
 //
 //    /**
 //     * @Route("/admin/categorie/form", name="form")
@@ -95,7 +97,7 @@ class CategorieController extends Controller {
 //          on fusionne les entity categorie
             $em->merge($categorie);
             $em->flush();
-            return $this->redirect($this->generateUrl('maj'));
+            return $this->redirect($this->generateUrl('categorie'));
         }
         return $this->redirectToRoute('categorie');
     }
