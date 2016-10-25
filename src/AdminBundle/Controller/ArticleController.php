@@ -62,14 +62,14 @@ class ArticleController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $formArticle = $this->createForm(ArticleType::class, $article);
-
+        
         if ($request->getMethod() == 'POST') {
             $formArticle->handleRequest($request);
             $a = $formArticle->getData();
             $em->merge($a);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('article', array(
+            return $this->redirect($this->generateUrl('mesBrouillons', array(
                                 'id' => $a->getId(),
                             ))
             );
@@ -91,5 +91,31 @@ class ArticleController extends Controller {
 
         return $this->redirect($this->generateUrl('articleHome'));
     }
+//    
+//    /**
+//     * @Route("/{id}/modifier/article", name="articleModifier")
+//     * @Template("AdminBundle:article:articleEditer.html.twig")
+//     */
+//    public function articleModifier(Article $article, Request $request) {
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $formArticle = $this->createForm(ArticleType::class, $article);
+//
+//        if ($request->getMethod() == 'POST') {
+//            $formArticle->handleRequest($request);
+//            $a = $formArticle->getData();
+//            $em->merge($a);
+//            $em->flush();
+//
+//            return $this->redirect($this->generateUrl('article', array(
+//                                'id' => $a->getId(),
+//                            ))
+//            );
+//        }
+//        return array(
+//            'id' => $article->getId(),
+//            'formArticle' => $formArticle->createView()
+//        );
+//    }
 
 }

@@ -19,7 +19,8 @@
             </div>
             <div class="panel-body">
               <div class="row">
-                  <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="{# http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png #}{{asset('uploads/img/')~ profil.avatar}}{#{{asset('externe/images/soccer.jpg')}}#}" class="img-responsive"> </div>
+                  <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="{# http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png #}{{asset('uploads/img/')~ profil.avatar}}{#{{asset('externe/images/soccer.jpg')}}#}" class="img-responsive"> 
+                  <a href="{{path('mesComs', {'id':profil.id})}}" class="btn btn-primary">modifier avatar</a></div>
                 
 
                 <div class=" col-md-9 col-lg-9 "> 
@@ -52,7 +53,7 @@
 
                   <a href="{{path('mesComs', {'id':profil.id})}}" class="btn btn-primary">Commentaires</a>
                   <a href="{{path('mesLikes', {'id':profil.id})}}" class="btn btn-primary">Likes</a>
-                  <a href="{{path('mesBrouillons', {'id':profil.id})}}" class="btn btn-primary">Brouillons</a>
+                  <a href="{{path('mesBrouillons', {'id':profil.id})}}" class="btn btn-primary">Articles</a>
                   <a href="{{path('category', {'id':profil.id})}}" class="btn btn-primary">Catégories</a>
                 </div>
               </div>

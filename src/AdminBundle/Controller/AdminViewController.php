@@ -76,7 +76,7 @@ class AdminViewController extends Controller {
     public function articleBrouillons() {
         return $this->render('AdminBundle::articlesBrouillons.html.twig', array(
                     "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
-//                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date"=>"desc")),
+                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date"=>"desc")),
         ));
     }
 
