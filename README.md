@@ -1,25 +1,29 @@
 blog
 ====
 
+Langages, Outils, frameworks utilisaient:
+==
+- LINUX	(UBUNTU)
+- BOOTSTRAP 3
+- NETBEANS 8
+- PHP 5
+- HTML5
+- CSS3
+- JQUERY 1.12
+- MYSQL
+- SYMFONY 3
+- GITHUB : <https://github.com/maddysonweppe/blog>
+- TRELLO : <https://trello.com/b/UTrsRmwy/blog>
+- FRAMAPAD : <https://mypads.framapad.org/mypads/?/mypads/group/certiblog-ozd3x7sz/pad/view/carnet-de-bord-god6x7n5>
 
---------------UTILISATION DU REPOSITORY------------------------------         
-A retenir, grace au repository, je peux faire un:
-select * form "table" where propriété:value
-
-Grace à la syntaxe du repository on peut récupérer une table entière de donnée grace au
-findAll(); en précisant la nom de l'entity à selectionner
-$profil = $em->getRepository("AdminBundle:Profil")->findAll();
-
-ou juste sélectionner par nom, email, pseudo grace à la syntaxe:
-$profil = $em->getRepository("AdminBundle:Profil")->findByName();
-
-findBy...(); exemple si je veux récupérer par email:
-findByEmail('nom de l'email');
-ou par ville:
-findByVille('Lunel')
-Ou par apprennant:
-findByApprennant('beWeb').....ect...etc..
--------------------------IMPORTANT--------------------------------------
-findByName(''); --> la partie "Name", 
-représente le nom d'une colonne qui nous intéresse dans une entity
-------------------------------------------------------------------------
+Etape à suivre pour installer le projet "BLOG" après l'avoir téléchargé:
+==
+1. Commencer par mettre les droits sur le dossier
+2. Faire un composer install dev 
+3. paramétrer le fichier parameters.yml 
+4. mettre à jour votre base de données 
+5. mettre les droits au dossier nouvellement créé
+6. il faut créer / pousser les entities dans votre base de données via le terminal avec la commande:
+php bin/console doctrine:schema:create
+7. Projet FONCTIONNEL, vous pouvez commencer à naviguer!  
+ATTENTION, vos entities dans la base de données sont vierges, cela impacte forcément la vue.
