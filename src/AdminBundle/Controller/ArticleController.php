@@ -42,26 +42,27 @@ class ArticleController extends Controller {
             "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
         );
     }
+
     /**
-     * @Route("/article/ajouter{brouillon}", name="addArticle")
+     * @Route("/article/ajouter", name="addArticle")
      * @Template("AdminBundle:article:article.html.twig")
      */
-    public function articleAjouter(Request $request, $brouillon) {
+    public function articleAjouter(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $article = new Article();
         $formArticle = $this->createForm(ArticleType::class, $article);
-        
+
         if ($request->getMethod() == 'POST') {
-            $article->setBrouillon($brouillon);
             $formArticle->handleRequest($request);
             $em->persist($article);
             $em->flush();
             return $this->redirect($this->generateUrl('home'));
         }
-        return $this->redirectToRoute('ajouter',array(
-            'formArticle' => $formArticle->createView(),
-            "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
-        ));
+        echo 'boo';
+//        return $this->redirectToRoute('ajouter',array(
+//            'formArticle' => $formArticle->createView(),
+//            "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+//        ));
     }
 
     /**
@@ -72,7 +73,7 @@ class ArticleController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $formArticle = $this->createForm(ArticleType::class, $article);
-        
+
         if ($request->getMethod() == 'POST') {
             $formArticle->handleRequest($request);
             $a = $formArticle->getData();
@@ -86,10 +87,12 @@ class ArticleController extends Controller {
         }
         return array(
             'id' => $article->getId(),
-            'formArticle' => $formArticle->createView()
+            'formArticle' => $formArticle->createView(),
+            "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+            "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findById($article),
         );
     }
-    
+
     /**
      * @Route("admin/publier{id}", name="publier")
      */
@@ -101,7 +104,7 @@ class ArticleController extends Controller {
         $em->flush();
         return $this->redirectToRoute("mesBrouillons");
     }
-    
+
     /**
      * @Route("/{id}/articleDelete", name="articleDelete")
      * 
@@ -113,6 +116,7 @@ class ArticleController extends Controller {
 
         return $this->redirect($this->generateUrl('articleHome'));
     }
+
 //    
 //    /**
 //     * @Route("/{id}/modifier/article", name="articleModifier")
@@ -139,5 +143,4 @@ class ArticleController extends Controller {
 //            'formArticle' => $formArticle->createView()
 //        );
 //    }
-
 }

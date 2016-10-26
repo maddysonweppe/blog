@@ -8,6 +8,7 @@
 
 namespace AdminBundle\Controller;
 
+use AdminBundle\Entity\Profil;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,17 +27,19 @@ class AdminViewController extends Controller {
 //    public function accueil() {
 //        
 //    }
-
-    /**
-     * @Route("/template", name="template")
-     */
-    public function template() {
-
-        return $this->render('template.html.twig', array(
-                    "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
-//                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date"=>"desc")),
-        ));
-    }
+//
+//    
+//    /**
+//     * @Route("/template/", name="template")
+//     */
+//    public function template() {
+//
+//        return $this->render('template.html.twig', array(
+//                    "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+////                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date"=>"desc")),
+//        ));
+//    }
+    
 
     /**
      * @Route("/admin/{id}/profil/detailsArticles")

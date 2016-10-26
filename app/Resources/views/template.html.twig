@@ -39,8 +39,8 @@
                                 <a href="{{path('categorie',{'categories':categorie.nom})}}">{{categorie.nom}}</a>
                             </li>
                         {% endfor %}
-                        {#                        <li>
-                                                    <a href="#">Football</a>
+                                                {#<li>
+                                                    <a href="#">{{app.user.email}}</a>
                                                 </li>
                                                 <li>
                                                     <a href="#">Rugby</a>
@@ -52,24 +52,27 @@
                                                     <a href="#">eSport</a>
                                                 </li>#}
                         <li>
-                            <button class="btn" onclick="openNav(1);" style=color:white;>Connexion</button>
-                        </li>
-                        <li>
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                                    <span class="glyphicon glyphicon-user"></span>
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{path('profil',{'id':2})}}">voir profil</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{path('home')}}">Déconnexion</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            {% if is_granted("ROLE_USER") %}
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                        <span class="glyphicon glyphicon-user"></span>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="{{path('profil',{'id':(app.user.id)})}}">voir profil</a>
+                                            
+                                        </li>
+                                        <li>
 
+                                            <a href="{{path("loginOut")}}">Déconnexion</a>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            {%else%}
+                                <button class="btn btn-success" onclick="openNav(1);" style=color:white;>Connexion</button>
+                            {% endif %}
                         </li>
 
                     </ul>
@@ -92,16 +95,20 @@
 
                             <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-                            <form id="loginform" class="form-horizontal" role="form">
+                            {#                            DEBUT DU FORMULAIRE DE CONNEXION----------------------------------------#}
+
+                            <form id="loginform" class="form-horizontal" role="form" action="{{path('loginCheck',{}) }}" method="post">
 
                                 <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="email">                                        
+                                    <input type="text" id="email" class="form-control" name="_username" placeholder="Email d'utilisateur" value=""/>
+                                    {#<input id="login-username" type="text" class="form-control" name="username" value="" placeholder="email">#}                                        
                                 </div>
 
                                 <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input id="login-password" type="password" class="form-control" name="password" placeholder="mot de passe">
+                                    <input class="form-control" type="password" id="mdp" name="_password" placeholder="Mot de passe" value=""/>
+                                    {#<input id="login-password" type="password" class="form-control" name="password" placeholder="mot de passe">#}
                                 </div>
 
 
@@ -119,9 +126,8 @@
                                     <!-- Button -->
 
                                     <div class="col-sm-12 controls">
-                                        <a id="btn-login" href="#" class="btn btn-success">Connexion</a>
-
-
+                                        <input id="btn-login" class="btn btn-success" type="submit" value="Connexion"/>
+                                        {#<a id="btn-login" href="#" class="btn btn-success">Connexion</a>#}
                                     </div>
                                 </div>
 
@@ -139,11 +145,12 @@
                                 </div>    
                             </form>     
 
-
+                            {#                      END FORMULAIRE DE CONNEXION--------------------------------------------#}
 
                         </div>                     
                     </div>  
                 </div>
+                            
                 <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
                     <div class="panel panel-info">
                         <div class="panel-heading">
@@ -160,11 +167,15 @@
                                 </div>
 
 
-
+{#                                {{form_start(formProfil,{'attr':{'action':path('ajouterProfil')}})}}#}
                                 <div class="form-group">
                                     <label for="email" class="col-md-3 control-label">Email</label>
                                     <div class="col-md-9">
+                                        {#{{form_start(formProfil)}}#}
                                         <input type="text" class="form-control" name="email" placeholder="Email">
+                                        {#{{form_widget(formProfil.email,{'attr':{'class':'form-control','placeholder':'Email'}})}}#}
+{#                                        {{form_widget(formCategorie.nom,{'attr':{'class':'form-control','placeholder':'ajoutez une catégorie'}})}}#}
+{#                                        {{form_start(formProfil)}}#}
                                     </div>
                                 </div>
 
@@ -190,7 +201,7 @@
                                 <div class="form-group">
                                     <!-- Button -->                                        
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Validez</button>  
+                                        <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Validez</button>  
                                     </div>
                                 </div>
 

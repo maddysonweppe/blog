@@ -2,61 +2,50 @@
 
 
 {% block body %}
-    <h3> créer un article </h3>
-    <div class="form-group">
-        {{form_start(formArticle)}}
-{#,{'attr':{'action':path('addArticle')}}#}
-    </div>
+    <div class="container">
+        <h3> Créer un article </h3>
+        <div class=" col-lg-8 col-lg-offset-2">
+            <div class="form-group">
+                {{form_start(formArticle,{'attr':{'action':path('addArticle')}})}}
+                {#,{'attr':{'action':path('addArticle')}}#}
+            </div>
+            <div>
+                {{ form_row(formArticle.categorie,{'attr':{'class' : 'form-control'}})}}                            <br>
+            </div>
+            <div>
+                <button type="submit" class="btn">
+                    {{ form_row(formArticle.image)}}
+                </button>
+            </div>
+            <div>
+                {{ form_row(formArticle.titre,{'attr':{'class' : 'form-control'}}) }}
+                <br>
+            </div>
+            <span class="input-group-btn">
 
+                <span class="glyphicon glyphicon-search"></span>
 
-    {{ form_row(formArticle.categorie,{'attr':{'class' : 'form-control'}})}}
-</div>
+            </span>
+            {#</div>#}
 
-<button type="submit" class="btn">{{ form_row(formArticle.image)}}
-</button>
+            <!-- creation d'article -->
+            <div class="well">
+                <form role="form">
+                    <div class="form-group">
+                        {#            <textarea class="form-control" rows="3"></textarea>#}
+                        {{ form_row(formArticle.texte,{'attr':{'class' : 'form-control'}}) }}
 
-{{ form_row(formArticle.titre,{'attr':{'class' : 'form-control'}}) }}
-<span class="input-group-btn">
+                    </div>
 
-    <span class="glyphicon glyphicon-search"></span>
-</button>
-</span>
-</div>
+                    {{ form_widget(formArticle.brouillon,{'attr':{'class' : 'form-control'}}) }}
 
-<!-- creation d'article -->
-<div class="well">
-    <form role="form">
-        <div class="form-group">
-            {#            <textarea class="form-control" rows="3"></textarea>#}
-            {{ form_row(formArticle.texte,{'attr':{'class' : 'form-control'}}) }}
+                    <input type="submit" class="btn btn-primary" value="Publier">
+                    {#{{form_end(formArticle)}}#}
 
+                </form>
+            </div>
+
+            <hr>
         </div>
-        {{ form_widget(formArticle.publier,{'attr':
-                                                {'class' : 'btn btn-primary',
-                                                 'action':path('addArticle', 
-                                                                            {'brouillon':0}
-                                                            )
-                                                }
-                                        }
-                    )
-        }}
-        
-        {{ form_widget(formArticle.brouillon,{'attr':
-                                                {'class' : 'btn btn-primary',
-                                                 'action':path('addArticle', 
-                                                                            {'brouillon':1}
-                                                            )
-                                                }
-                                        }
-                    )
-        }}
-{#        <input type="submit" class="btn btn-primary" value="Publier" id="0">
-        <input type="submit" class="btn btn-primary" value="Brouillon" id="1">#}
-        {{form_end(formArticle)}}
-
-    </form>
-</div>
-
-<hr>
-
+    </div>
 {% endblock %}
