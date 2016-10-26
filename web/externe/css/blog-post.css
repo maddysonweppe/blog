@@ -1,6 +1,7 @@
+
 body {
-    background-color: #E9EDF6;
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    background-color: #E9EDF6; /* gris */
+    padding-top: 70px;
 }
 
 footer {
@@ -27,7 +28,7 @@ footer {
 }
 
 .table-user-information > tbody > tr {
-    border-top: 1px solid rgb(221, 221, 221);
+    border-top: 1px solid rgb(221, 221, 221); /* gris un peu plus foncé */
 }
 
 .table-user-information > tbody > tr:first-child {
@@ -63,29 +64,27 @@ footer {
 }
 .panel>.panel-heading:after{
 	border-width:7px;
-	border-right-color:#f7f7f7;
+	border-right-color:#f7f7f7; /* gris clair */
 	margin-top:1px;
 	margin-left:2px;
 }
 .panel>.panel-heading:before{
-	border-right-color:#ddd;
+	border-right-color:#ddd; /* gris */
 	border-width:8px;
 }
 .article{
     margin-top: -20px;
-    margin-left: -30px;
+    margin-left: 0px;
     padding-left: 30px;
-    background-color: #FFF;
-    height: 325px;
+    background-color: #FFF; /* blanc */
+    height: 390px;
+    padding-left: 0px;
 }
+    
 .titre{
     font-size: 2.2em;
 }
-.bliat{
-    margin-top: 20px;
-    text-align: justify;
-    margin-right: 30px;
-}
+
 .sidediv {/* The side content*/
     height: 100%;
     width: 0;
@@ -93,10 +92,10 @@ footer {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #1c1c1c; /* dark grey*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidediv */
+    background-color: #1c1c1c; /* gris sombre */
+    overflow-x: hidden; /* on desactive le scroll horizontal */
+    padding-top: 60px;
+    transition: 0.5s;
 }
 
 /* The side content links */
@@ -104,7 +103,7 @@ footer {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: #818181; /* gris foncé */
     display: inline-block;
     transition: 0.3s
 }
@@ -117,7 +116,7 @@ footer {
 
 /* When you mouse over the links, change their color */
 .sidediv a:hover, .offcanvas a:focus{
-    color: #f1f1f1;
+    color: #f1f1f1; /* gris clair */
 }
 
 /* Position and style the close button (top right corner) */
