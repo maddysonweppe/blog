@@ -51,7 +51,6 @@ class AdminViewController extends Controller {
 
     /**
      * @Route("/admin/{id}/profil/likesprofil", name="mesLikes")
-     * @Template(".html.twig")
      */
     public function likesProfil() {
         return $this->render('AdminBundle::likes.html.twig', array(
@@ -71,21 +70,33 @@ class AdminViewController extends Controller {
     }
 
     /**
-     * @Route("/admin/{id}/profil/articlesBrouillons", name="mesBrouillons")
+     * @Route("/admin/articlesBrouillons", name="mesBrouillons")
      */
     public function articleBrouillons() {
-        return $this->render('AdminBundle::articlesBrouillons.html.twig', array(
+        return $this->render('AdminBundle:article:articlesBrouillons.html.twig', array(
                     "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
-                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date"=>"desc")),
+                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array('brouillon' => 1), array("date" => "desc")),
+        ));
+    }
+
+    /**
+     * @Route("/admin/{id}/profil/mesArticles", name="mesArticles")
+     */
+    public function article() {
+        return $this->render('SiteBundle::generale.html.twig', array(
+                    "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date" => "desc")),
         ));
     }
 
     /**
      * @Route("/admin/{id}/profil/commentaires", name="mesComs")
      */
-    public function commentairesProfil() {
+    public function commentairesProfil($id) {
+
         return $this->render('AdminBundle::autreprofil.html.twig', array(
                     "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+                    "commentaires" => $this->getDoctrine()->getRepository('AdminBundle:Commentaire')->findByPseudo($id),
 //                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date"=>"desc")),
         ));
     }

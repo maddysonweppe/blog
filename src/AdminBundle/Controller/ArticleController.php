@@ -9,9 +9,7 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\Entity\Article;
-use AdminBundle\Entity\Commentaire;
 use AdminBundle\Form\ArticleType;
-use AdminBundle\Form\CommentaireType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -34,24 +32,36 @@ class ArticleController extends Controller {
     }
 
     /**
-     * @Route("/article/ajouter", name="addArticle")
-     * @Template("AdminBundle:article:articleAjouter.html.twig")
+     * @Route("/article/form", name="formArticle")
+     * @Template("AdminBundle:article:article.html.twig")
      */
-    public function articleAjouter(Request $request) {
+    public function articleForm() {
+        $formArticle = $this->createForm(ArticleType::class);
+        return array(
+            'formArticle' => $formArticle->createView(),
+            "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+        );
+    }
+    /**
+     * @Route("/article/ajouter{brouillon}", name="addArticle")
+     * @Template("AdminBundle:article:article.html.twig")
+     */
+    public function articleAjouter(Request $request, $brouillon) {
         $em = $this->getDoctrine()->getManager();
         $article = new Article();
         $formArticle = $this->createForm(ArticleType::class, $article);
-        $article->setBrouillon(1);
+        
         if ($request->getMethod() == 'POST') {
+            $article->setBrouillon($brouillon);
             $formArticle->handleRequest($request);
             $em->persist($article);
             $em->flush();
-            return $this->redirect($this->generateUrl('articleHome'));
+            return $this->redirect($this->generateUrl('home'));
         }
-
-        return array(
-            'formArticle' => $formArticle->createView()
-        );
+        return $this->redirectToRoute('ajouter',array(
+            'formArticle' => $formArticle->createView(),
+            "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+        ));
     }
 
     /**
@@ -79,7 +89,19 @@ class ArticleController extends Controller {
             'formArticle' => $formArticle->createView()
         );
     }
-
+    
+    /**
+     * @Route("admin/publier{id}", name="publier")
+     */
+    public function publierArticle(Article $article) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $this->createForm(ArticleType::class, $article);
+        $article->setBrouillon(0);
+        $em->merge($article);
+        $em->flush();
+        return $this->redirectToRoute("mesBrouillons");
+    }
+    
     /**
      * @Route("/{id}/articleDelete", name="articleDelete")
      * 

@@ -1,58 +1,54 @@
 {% extends "::template.html.twig" %}
 {% block body %}
-<div class="container">
-	<div class="row">
-		<div class="page-header">
-          <h1>Blog de JSAIPAKi</h1>
-          <span class="icon-bar">
-            <i class="glyphicon glyphicon-tower" aria-hidden="true"></i>
-          </span>
-          <h2>Articles Récents</h2>
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1>Blog de JSAIPAKi</h1>
+                <span class="icon-bar">
+                    <i class="glyphicon glyphicon-tower" aria-hidden="true"></i>
+                </span>
+                <h2>Articles Récents</h2>
+            </div>
         </div>
-	</div>
-</div>
+    </div>
     <!-- Page Content -->
     <div class="container">
+        <a href="{{path('formArticle')}}" class="btn btn-primary">Ajouter articles</a>
+        <a href="{{path('mesBrouillons')}}" class="btn btn-primary">Voir mes brouillons</a>
         {% for article in articles %}
-        <div class="row">
+            <div class="row">
 
-            <!-- Blog Post Content Column -->
-            <div  class="container">
-                <hr>
-                <div class="col-md-12" >
-                    <div class="col-md-6" >
-                        <!-- Preview Image -->
-                        <img class="img-responsive" src="{{ asset('externe/images/rugby.jpg') }}" alt="">
-                    </div>
+                <!-- Blog Post Content Column -->
+                <div  class="container">
+                    <hr>
+                    <div class="col-md-12" >
+                        <div class="col-md-6" >
+                            <!-- Preview Image -->
+                            <img class="img-responsive" src="{{ asset('externe/images/rugby.jpg') }}" alt="">
+                        </div>
 
 
-                    <div class="col-md-6" >
-                        <div class="article">
-                            <!-- Blog article -->
+                        <div class="col-md-6" >
+                            <div class="article1">
+                                <!-- Blog article -->
 
-                            <!-- Title -->
-                            <h1 class="titre">The Kicking MACHINE</h1>
+                                <!-- Title -->
+                                <h1 class="titre">{{article.titre}}</h1>
 
-                            <!-- Post Content -->
-                            <p class="postgeneral">JONNY WILKINSON - "The Kicking MACHINE"
-                                Sed lobortis mi. Suspendisse vel placerat ligula.
-                                Vivamus ac sem lac. Ut vehicula rhoncus elementum.
-                                Etiam quis tristique lectus.
-                                Aliquam in arcu eget velit pulvinar dictum vel in justo.
-                                Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.
-                                Praesent sed lobortis mi. Suspendisse vel placerat ligula.
-                                Vivamus ac lacus. Ut vehicula rhoncus elementum.
-                                Etiam quis tristique lectus.
-                                Aliquam in arcu eget velit pulvinar dict vel in justo.
-                                Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
-                            <a href="{{ path('idDetail', {'id':article.id}) }}">
-                                en voir +
-                            </a>
+                                <!-- Post Content -->
+                                <p class="postgeneral">
+                                    {{article.texte}}
+                                </p>
+                                <a href="{{ path('idDetail', {'id':article.id}) }}">
+                                    en voir +
+                                </a>
+                            </div>
+                                    
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+                                    <br/><br/>
         {% endfor %}
     </div>
     <!-- /.row -->

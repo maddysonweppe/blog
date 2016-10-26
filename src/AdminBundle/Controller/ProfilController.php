@@ -100,11 +100,8 @@ class ProfilController extends Controller {
         if ($request->getMethod() == 'POST') {
             $formProfil->handleRequest($request);
 
-            $nomDuFichier = md5(uniqid()) . "." . $profil->getAvatar()->getClientOriginalExtension();
 
-            $profil->getAvatar()->move('uploads/img', $nomDuFichier);
-
-            $profil->setAvatar($nomDuFichier);
+            $profil->setAvatar("../../externe/images/user.svg");
 
             $profil->setRole(array("ROLE_USER"));
 
@@ -124,6 +121,28 @@ class ProfilController extends Controller {
         );
     }
 
+    public function editerAvatar(Request $request, $id) {
+//  On doit supprimer un information en particulié, et non pas toute la base de donnée
+//  On récupère par id pour supprimer par id dans la base de donnée
+        $em = $this->getDoctrine()->getManager();
+        $profil = $em->getRepository("AdminBundle:Profil")->findById($id);
+        $formProfil = $this->createForm(ProfilType::class, $profil);
+
+//  On utilise le fonction "remove()" pour supprimer
+        if ($request->getMethod() == 'POST') {
+            $formProfil->handleRequest($request);
+            $nomDuFichier = md5(uniqid()) . "." . $profil->getAvatar()->getClientOriginalExtension();
+            $profil->getAvatar()->move('uploads/img', $nomDuFichier);
+            $profil->setAvatar($nomDuFichier);
+//  Grace à la function / méthode "persist" on met les inforations
+//  du formulaire en mémoire
+            $em->persist($profil);
+//  Puis on flush qui va sauvegarder en base de donnée
+            $em->flush();
+            return $this->redirect($this->generateUrl('connexion'));
+        }
+    }
+
     /**
      * @Route("/{id}/supprimer", name="supprimerProfil")
      * @Template("AdminBundle:profil:profilSupprimer.html.twig")
@@ -133,18 +152,6 @@ class ProfilController extends Controller {
 //  On récupère par id pour supprimer par id dans la base de donnée
         $em = $this->getDoctrine()->getManager();
         $profil = $em->getRepository("AdminBundle:Profil")->findById($id);
-
-        return array(
-            'profil' => $profil,
-        );
-    }
-
-    /**
-     * @Route("/{id}/delete", name="deleteProfil")
-     * 
-     */
-    public function profilDeleteAction(Profil $profil) {
-        $em = $this->getDoctrine()->getManager();
 //  On utilise le fonction "remove()" pour supprimer
         $em->remove($profil);
 //  Puis flush pour sauvegarder l'information qui est stocké en mémoire

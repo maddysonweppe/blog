@@ -2,7 +2,6 @@
 
 
 {% block body %}
-
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -11,40 +10,26 @@
                 <br>
             </div><!-- /col-sm-12 -->
         </div><!-- /row -->
+
         <div class="row">
-            <div class="col-sm-1">
-                <div class="thumbnail">
-                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                </div><!-- /thumbnail -->
-            </div><!-- /col-sm-1 -->
+            {% for commentaire in commentaires %}
+                <div class="col-sm-1">
+                    <div class="thumbnail">
+                        <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                    </div><!-- /thumbnail -->
+                </div><!-- /col-sm-1 -->
 
-            <div class="col-sm-5">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong>NomUtilisateur</strong> <span class="text-muted">commenté le 16 octobre</span>
-                    </div>
-                    <div class="panel-body">
-                        Super article, heureusement que Sébastien et Alexandre sont là pour faire le back !
-                    </div><!-- /panel-body -->
-                </div><!-- /panel panel-default -->
-            </div><!-- /col-sm-5 -->
-
-            <div class="col-sm-1">
-                <div class="thumbnail">
-                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                </div><!-- /thumbnail -->
-            </div><!-- /col-sm-1 -->
-
-            <div class="col-sm-5">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong>NomUtilisateur</strong> <span class="text-muted">commenté le 15 octobre</span>
-                    </div>
-                    <div class="panel-body">
-                        Super article, heureusement que Sébastien et Alexandre sont là pour faire le back !
-                    </div><!-- /panel-body -->
-                </div><!-- /panel panel-default -->
-            </div><!-- /col-sm-5 -->
+                <div class="col-sm-5">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong>{{commentaire.pseudo}}</strong> <span class="text-muted"><small><time>{{ commentaire.date|date('d M Y') }}</time></small></span>
+                        </div>
+                        <div class="panel-body">
+                            {{commentaire.texte}}
+                        </div><!-- /panel-body -->
+                    </div><!-- /panel panel-default -->
+                </div><!-- /col-sm-5 -->
+            {% endfor %}
         </div><!-- /row -->
     </div><!-- /container -->
 

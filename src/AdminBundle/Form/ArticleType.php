@@ -19,7 +19,8 @@ class ArticleType extends AbstractType
                 ->add('titre')
                 ->add('categorie')
                 ->add('image', FileType::class, array('data_class' => null))
-                ->add('valider', SubmitType::class);
+                ->add('publier', SubmitType::class)
+                ->add('brouillon', SubmitType::class);
     }
     
     /**
