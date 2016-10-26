@@ -1,6 +1,51 @@
+{% for article in article %}
 
-{{form_start(formArticle,{'attr':{'action':path('articleEditer',{ 'id' : id })}})}}
+    <!-- Page Content -->
+    <div class="container">
+        {{form_start(formArticle,{'attr':{'action':path('articleEditer',{ 'id' : id })}})}}
 
-{{ form_widget(formArticle) }}
-       
-{{form_end(formArticle)}}
+        <div class="row">
+
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+                {{ form_row(formArticle.titre) }}
+
+                {{ form_row(formArticle.categorie) }}
+
+                <!-- Author -->
+                <p class="lead">
+                    par <a href="#">Kirikou l'homme sombre</a>
+                </p>
+
+                <hr>
+
+                <!-- Date/Time -->
+                <p><span class="glyphicon glyphicon-time"></span> Publié le <time>{{ article.date|date('d M Y') }}</time>.</p>
+
+                <hr>
+
+                <!-- Preview Image -->
+                {{ form_row(formArticle.image) }}
+
+                <hr>
+
+                <!-- Post Content -->
+                {{ form_row(formArticle.texte) }}
+
+                <hr>
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+    </div>
+    <!-- /.container -->
+    {{form_end(formArticle)}}
+
+{% endfor %}

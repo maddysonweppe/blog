@@ -40,7 +40,8 @@ class Commentaire
     /**
      * @var string
      *
-     * @ORM\Column(name="pseudo", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Profil")
+     * @ORM\JoinColumn(name="fk_pseudo", referencedColumnName="id")
      */
     private $pseudo;
     

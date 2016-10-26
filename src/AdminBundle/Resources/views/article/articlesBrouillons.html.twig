@@ -1,0 +1,26 @@
+{% extends "::template.html.twig" %}
+
+
+{% block body %}
+
+    <div class="container-fluid">
+        <h1> Mes articles sauvegardés </h1>
+        {% for article in articles %}
+            <div class="row">
+
+                <div class="col-sm-4"><img class="img-responsive" src="http://www.ouest-france.fr/sites/default/files/styles/image-640x360/public/2016/08/14/peronne-cup-du-beau-football-devant-plus-de-300-personnes-verson.jpg?itok=TIdEr4ve"/></div>
+                <div class="col-sm-8">
+                    <h3>{{ article.titre }}</h1>
+                        <p>{{ article.texte }}</p>
+                        </br></br>
+                        <button id="btn-signup" type="button" class="btn btn-warning"><i class="icon-hand-right"></i><a href="{{ path('articleEditer',{'id':article.id}) }}">Modifier</a></button>
+                        <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i><a href="{{ path('publier',{'id':article.id}) }}">Publier</a></button>
+
+                </div>
+
+            </div>
+            </br></br>
+        {% endfor %}
+
+    </div>
+{% endblock %}

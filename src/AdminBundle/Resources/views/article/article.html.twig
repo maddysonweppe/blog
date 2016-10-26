@@ -1,12 +1,62 @@
-<h1>ARTICLE HOME</h1>
+{% extends "::template.html.twig" %}
 
-{% for article in article %}
-    <time>{{ article.date|date('d M Y') }}</time><br><br>
-    {{ article.texte }}<br>
-    {{ article.titre }}<br>
-    {{ article.categorie }}<br>
-    {{ article.image }}<br>
 
-    <a href="{{ path('articleEditer', {'id':article.id}) }}">editer profil</a><br>
-    <a href="{{ path('articleDelete', {'id':article.id}) }}">Supprimer</a>
-{% endfor %}
+{% block body %}
+    <h3> créer un article </h3>
+    <div class="form-group">
+        {{form_start(formArticle)}}
+{#,{'attr':{'action':path('addArticle')}}#}
+    </div>
+
+
+    {{ form_row(formArticle.categorie,{'attr':{'class' : 'form-control'}})}}
+</div>
+
+<button type="submit" class="btn">{{ form_row(formArticle.image)}}
+</button>
+
+{{ form_row(formArticle.titre,{'attr':{'class' : 'form-control'}}) }}
+<span class="input-group-btn">
+
+    <span class="glyphicon glyphicon-search"></span>
+</button>
+</span>
+</div>
+
+<!-- creation d'article -->
+<div class="well">
+    <form role="form">
+        <div class="form-group">
+            {#            <textarea class="form-control" rows="3"></textarea>#}
+            {{ form_row(formArticle.texte,{'attr':{'class' : 'form-control'}}) }}
+
+        </div>
+        {{ form_widget(formArticle.publier,{'attr':
+                                                {'class' : 'btn btn-primary',
+                                                 'action':path('addArticle', 
+                                                                            {'brouillon':0}
+                                                            )
+                                                }
+                                        }
+                    )
+        }}
+        
+        {{ form_widget(formArticle.brouillon,{'attr':
+                                                {'class' : 'btn btn-primary',
+                                                 'action':path('addArticle', 
+                                                                            {'brouillon':1}
+                                                            )
+                                                }
+                                        }
+                    )
+        }}
+{#        <input type="submit" class="btn btn-primary" value="Publier" id="0">
+        <input type="submit" class="btn btn-primary" value="Brouillon" id="1">#}
+        {{form_end(formArticle)}}
+
+    </form>
+</div>
+
+<hr>
+
+{% endblock %}

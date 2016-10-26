@@ -23,7 +23,7 @@ class ViewController extends Controller {
     public function indexHome() {
         return $this->render('SiteBundle::generale.html.twig', array(
                     "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
-                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array(), array("date" => "desc")),
+                    "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findBy(array('brouillon'=> 0), array("date" => "desc")),
         ));
     }
 
