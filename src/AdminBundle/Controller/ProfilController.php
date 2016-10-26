@@ -28,9 +28,8 @@ class ProfilController extends Controller {
      * @Template("AdminBundle:profil:profil.html.twig")
      */
     public function profil($id) {
-        $em = $this->getDoctrine()->getManager();
 //  Pour l'utilisation du repository voir le README !
-        $profil = $em->getRepository("AdminBundle:Profil")->findById($id);
+        $profil = $this->getDoctrine()->getRepository("AdminBundle:Profil")->findById($id);
         return $this->render('AdminBundle:profil:profil.html.twig', array(
                     "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
                     'profil' => $profil,
@@ -80,6 +79,7 @@ class ProfilController extends Controller {
         }
 //  array qui lit la vue (cle => valeur)
         return array(
+            'profil' => $this->getDoctrine()->getRepository("AdminBundle:Profil")->findById($profil),
             'id' => $profil->getId(),
             'formProfil' => $formProfil->createView(),
             "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
