@@ -1,20 +1,80 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
 security:
-
+    # celui qui a un ROLE_ADMIN à aussi les privilèges du USER standard ;)
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+#    Les providers permettent de choisir la methode d'authetification (en dur ou via une database
     providers:
+        # ici gestionUser est defini pour une auth via database
+        gestionUser:
+            entity:
+                class: AdminBundle:Profil
+                property: email
+        # ici on peut coder en dur des users         
         in_memory:
-            memory: ~
-
+            memory: 
+                users:
+                    admin:
+                        password: admin
+                        roles: 'ROLE_ADMIN'
+                    loic:
+                        password: loic
+                        
+                        roles: 'ROLE_USER'
+    # Comme son nom l'indique le parefeu va "filtrer" les requetes entrantes
+    # et selon la politique de filtre va effectuer automatiquement certaines actions             
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
+        # firewall en mode dev ! annule le parefeu sur les fichiers genre css etc en mode dev
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        main:
-            anonymous: ~
+            
+        # firewall de base en gros pour le site complet
+        # Accepte les connexions anonymes + declaration du formulaire de login    
+        main:     
+            pattern : ^/
+            anonymous: true
+            # important !!! renseignez le provider a utiliser !
+            provider: gestionUser
+            form_login:
+                check_path: loginCheck
+                login_path: home
+            logout:
+                path: loginOut
+                target: /
+        # Firewall pour la zone d'administration   
+        # ici c'est avec le provider codé en dur 
+        # quand on accede à : www.monsite.fr/admin
+        # pas d'annonyme !        
+        administration:
+            pattern: ^/admin
+            anonymous: false
+            provider: gestionUser
+            # le formulaire de login pour que symfony sache où il campe
+            form_login:
+                check_path: loginCheck
+                login_path: home
+            logout:
+                path: loginOut
+                target: /
+        
+        
+    # ici c'est le cryptage des mots de passe (ou pas)            
+    encoders:
+        AdminBundle\Entity\Profil:
+            algorithm: plaintext
+            ignore_case: false
+    
+     # evidement on peut jouer sur differents niveaux de restrictions   
+    access_control:   
+        # Un admin ou un user classique peut ajouter une annonce ... quelque chose d'étrange est ici ....
+#        - { path: ^/a , roles: [ROLE_ADMIN , ROLE_USER] }       
+        # seul un admin peut ajouter une categorie
+#        - { path: ^/categories , roles: ROLE_ADMIN }         
+        
             # activate different ways to authenticate
 
             # http_basic: ~

@@ -2,84 +2,71 @@
 
 
 {% block body %}
-    {#<div>#}
+    <div>
         {{form_start(formProfil,{'attr':{'action':path('editerProfil',{ 'id' : id }), 'class' : 'container'}})}}
-        <div class="row">
-            
-            <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
-                <br>
-            </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+                    <br>
+                    {#                <a href="{{ path('editerProfil', {'id':profil.id}) }}" class="btn btn-warning">Modifier</a>#}
+                </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-
-
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3>{{ form_row(formProfil.pseudo,{'attr':{'class' : 'panel-title'}}) }}</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-3 col-lg-3 " align="center"><img alt="User Pic" class="img-circle img-responsive" src="{{ form_row(formProfil.avatar) }}"> </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
 
 
-                            <div class=" col-md-9 col-lg-9 "> 
-                                <table class="table table-user-information">
-                                    <tbody>
-                                        <tr>
-                                            <td>Prénom</td>
-                                            <td>{{ form_row(formProfil.prenom) }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Nom</td>
-                                            <td>{{ form_row(formProfil.nom) }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Adresse mail</td>
-                                            <td>{{ form_row(formProfil.email) }}</td>
-                                        </tr>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            {{ form_widget(formProfil.pseudo,{'attr':{'class' : 'panel-title'}}) }}
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3 " align="center">{#<img alt="User Pic" class="img-circle img-responsive" src="{{ form_widget(formProfil.avatar) }}"> #}</div>
 
-                                        <tr>
-                                        <tr>
-                                            <td>Mot de passe</td>
-                                            <td>{{ form_row(formProfil.mdp) }}</td>
-                                        </tr>
-                                            <td>{{form_row(formProfil.valider)}}</td>
 
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                                <a href="{#{{path('mesComs', {'id':profil.id})}}#}" class="btn btn-primary">Commentaires</a>
-                                <a href="{#{{path('mesLikes', {'id':profil.id})}}#}" class="btn btn-primary">Likes</a>
-                                <a href="{#{{path('mesBrouillons', {'id':profil.id})}}#}" class="btn btn-primary">Brouillons</a>
-                                <a href="{#{{path('categorie', {'id':profil.id})}}#}" class="btn btn-primary">Catégories</a>
+                                <div class=" col-md-9 col-lg-9 "> 
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                            <tr>
+                                                <td>Prénom</td>
+                                                <td>{{ form_widget(formProfil.prenom) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nom</td>
+                                                <td>{{ form_widget(formProfil.nom) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Adresse mail</td>
+                                                <td>{{ form_widget(formProfil.email) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mot de passe</td>
+                                                <td>{{ form_widget(formProfil.mdp) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <input type="submit" value="valide" class="btn btn-info">
+{#                                                    {{form_widget(formProfil.valider,{'attr':{'class' : 'btn btn-info'}})}}#}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                     {% for profil in profil %}
+                                         <a href="{{path('mesComs', {'id':profil.id})}}" class="btn btn-primary">Commentaires</a>
+                                         <a href="{{path('mesLikes', {'id':profil.id})}}" class="btn btn-primary">Likes</a>
+                                         {% if is_granted("ROLE_ADMIN") %}
+                                         <a href="{{path('mesArticles', {'id':profil.id})}}" class="btn btn-primary">Articles</a>
+                                         <a href="{{path('category')}}" class="btn btn-primary">Catégories</a>
+                                         {% endif %}
+                                     {% endfor %}
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
-
-
                 </div>
             </div>
         </div>
-    {#</div>#}
+    </div>
 {% endblock %}
-
-{#{{form_start(formProfil)}}
-
-{{ form_widget(formProfil) }}
-       
-{{form_end(formProfil)}}#}
-
-{#{{form_start(formCommentaire,{'attr':{'action':path('sauvegardeCommentaire')}})}}
-<div class="form-group">
-    {{ form_row(formCommentaire.texte,{'attr':{'class' : 'form-control'}}) }}
-</div>
-{{ form_row(formCommentaire.pseudo) }}
-{{ form_row(formCommentaire.valider,{'attr':{'class' : 'btn btn-primary'}}) }}
-
-{{form_end(formCommentaire)}}#}
-
-{#{{form_start(formProfil)}}
-{{ form_row(formProfil.texte,{'attr':{'class' : 'form-control'}}) }}
-{{ form_row(formCommentaire.pseudo) }}
-{{ form_row(formCommentaire.valider,{'attr':{'class' : 'btn btn-primary'}}) }}#}

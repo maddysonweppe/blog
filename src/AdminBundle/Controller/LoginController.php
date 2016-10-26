@@ -8,8 +8,10 @@
 
 namespace AdminBundle\Controller;
 
+use AdminBundle\Entity\Profil;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Description of LoginController
@@ -19,13 +21,35 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class LoginController extends Controller{
 
     /**
-     * @Route("/connexion", name="connexion")
+     * @Route("/addP",name="addP")
+     * @throws Exception
      */
-    public function indexLog() {
-
-        return $this->render('SiteBundle::connexion.html.twig', array(
-                    "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
-        ));
+    public function addP() {
+        $u = new Profil();
+        $u->setEmail("Lencetre@gmail.com");
+        $u->setMdp("user");
+        $u->setRole(array("ROLE_USER"));
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($u);
+        $em->flush();
+        
+        return $this->redirectToRoute("home");
+    }
+    
+    /**
+     * @Route("/loginCheck",name="loginCheck")
+     * @throws Exception
+     */
+    public function check() {
+        throw new Exception('Verifiez votre fichier security');
+    }
+    /**
+     * @Route("/loginOut",name="loginOut")
+     * @throws Exception
+     */
+    public function logout() {
+        throw new Exception('Verifiez votre fichier security');
     }
 
 }

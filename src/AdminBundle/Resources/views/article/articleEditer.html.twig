@@ -1,8 +1,10 @@
-{% for article in article %}
+{% extends "::template.html.twig" %}
 
-    <!-- Page Content -->
-    <div class="container">
-        {{form_start(formArticle,{'attr':{'action':path('articleEditer',{ 'id' : id })}})}}
+{% block body %}
+<!-- Page Content -->
+<div class="container">
+    {{form_start(formArticle,{'attr':{'action':path('articleEditer',{ 'id' : id })}})}}
+    {% for article in articles %}
 
         <div class="row">
 
@@ -19,14 +21,14 @@
                 {{ form_row(formArticle.categorie) }}
 
                 <!-- Author -->
-                <p class="lead">
+     {#           <p class="lead">
                     par <a href="#">Kirikou l'homme sombre</a>
                 </p>
 
                 <hr>
-
+#}
                 <!-- Date/Time -->
-                <p><span class="glyphicon glyphicon-time"></span> Publié le <time>{{ article.date|date('d M Y') }}</time>.</p>
+{#                <p><span class="glyphicon glyphicon-time"></span> Publié le <time>{{ article.date|date('d M Y') }}</time>.</p>#}
 
                 <hr>
 
@@ -44,8 +46,9 @@
             <!-- /.row -->
 
         </div>
-    </div>
-    <!-- /.container -->
-    {{form_end(formArticle)}}
+    {% endfor %}
 
-{% endfor %}
+    {{form_end(formArticle)}}
+</div>
+<!-- /.container -->
+{% endblock %}

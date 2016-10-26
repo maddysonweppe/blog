@@ -3,7 +3,8 @@
     <div class="container">
         <div class="row">
             <div class="page-header">
-                <h1>Blog de JSAIPAKi</h1>
+                <h1>sportNews</h1>
+                <h3>l'actualité chaque jours </h3>
                 <span class="icon-bar">
                     <i class="glyphicon glyphicon-tower" aria-hidden="true"></i>
                 </span>
@@ -13,13 +14,15 @@
     </div>
     <!-- Page Content -->
     <div class="container">
+         {% if is_granted("ROLE_ADMIN") %}
         <a href="{{path('formArticle')}}" class="btn btn-primary">Ajouter articles</a>
         <a href="{{path('mesBrouillons')}}" class="btn btn-primary">Voir mes brouillons</a>
+         {% endif %}
         {% for article in articles %}
             <div class="row">
 
                 <!-- Blog Post Content Column -->
-                <div  class="container">
+            
                     <hr>
                     <div class="col-md-12" >
                         <div class="col-md-6" >
@@ -46,7 +49,7 @@
                                     
                         </div>
                     </div>
-                </div>
+              
             </div>
                                     <br/><br/>
         {% endfor %}

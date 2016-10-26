@@ -4,7 +4,6 @@ namespace AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,8 +18,9 @@ class ArticleType extends AbstractType
                 ->add('titre')
                 ->add('categorie')
                 ->add('image', FileType::class, array('data_class' => null))
-                ->add('publier', SubmitType::class)
-                ->add('brouillon', SubmitType::class);
+//                ->add('publier', SubmitType::class)
+                ->add('brouillon')
+                ;
     }
     
     /**

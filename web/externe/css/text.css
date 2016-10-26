@@ -8,27 +8,27 @@
 div.box {
   text-align: center;
   width: 55px;
-  background-color: #eee;
+  background-color: #eee; /* gris clair */
   border-radius: 3px;
-  box-shadow:0 0 10px #000;
+  box-shadow:0 0 10px #000; /* noir */
   padding: 3px;
 }
 div.box {
   font-family: arial;
   font-size: 12px;
   text-decoration: none;
-  color: #000;
+  color: #000; /* noir */
 }
 div.box:hover {
   cursor: pointer;
-  background-color:#fdd;
+  background-color:#fdd; /* saumon */
 }
 
 /* css footer */
 .footer-dark {
   padding:50px 0;
-  color:#f0f9ff;
-  background-color:#282d32;
+  color:#f0f9ff; /* bleu très très clair */
+  background-color:#282d32; /* noir */
 }
 
 .footer-dark h3 {
@@ -97,9 +97,9 @@ div.box:hover {
   display:inline-block;
   text-align:center;
   border-radius:50%;
-  box-shadow:0 0 0 1px rgba(255,255,255,0.4);
+  box-shadow:0 0 0 1px rgba(255,255,255,0.4); /* blanc */
   margin:0 8px;
-  color:#fff;
+  color:#fff; /* blanc */
   opacity:0.75;
 }
 
@@ -128,7 +128,7 @@ h1 {
 h2 {
   font-family: 'Open Sans';
   font-weight: 300;
-  color: #ccc;
+  color: #ccc; /* gris clair */
   font-size: 1.9em;
 }
 
@@ -146,7 +146,7 @@ h2 {
 .icon-bar {
   font-size: 1.3em;
   position: relative;
-  color: #ff9933;
+  color: #ff9933; /* orange */
 }
 
 .icon-bar:after,
@@ -156,7 +156,7 @@ h2 {
   content: '';
   width: 70px;
   height: 1px;
-  background: #ccc;
+  background: #ccc; /* gris clair */
   position: absolute;
   left: 35px;
   top: 50%;

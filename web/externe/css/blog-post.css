@@ -1,6 +1,7 @@
+
 body {
-    background-color: #E9EDF6;
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    background-color: #E9EDF6; /* gris */
+    padding-top: 70px;
 }
 
 footer {
@@ -27,7 +28,7 @@ footer {
 }
 
 .table-user-information > tbody > tr {
-    border-top: 1px solid rgb(221, 221, 221);
+    border-top: 1px solid rgb(221, 221, 221); /* gris un peu plus foncé */
 }
 
 .table-user-information > tbody > tr:first-child {
@@ -63,12 +64,12 @@ footer {
 }
 .panel>.panel-heading:after{
 	border-width:7px;
-	border-right-color:#f7f7f7;
+	border-right-color:#f7f7f7; /* gris clair */
 	margin-top:1px;
 	margin-left:2px;
 }
 .panel>.panel-heading:before{
-	border-right-color:#ddd;
+	border-right-color:#ddd; /* gris */
 	border-width:8px;
 }
 .article{
@@ -76,6 +77,7 @@ footer {
     background-color: #FFF;
     
 }
+    
 .titre{
     font-size: 2.2em;
 }
