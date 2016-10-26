@@ -39,12 +39,15 @@
 
                     <!-- Post Content -->
                     <p class="lead">{{ article.texte }}</p>
+                    {% if is_granted("ROLE_ADMIN") %}
                     <button id="btn-signup" type="button" class="btn btn-warning"><i class="icon-hand-right"></i><a href="{{ path('articleEditer',{'id':article.id}) }}">Modifier</a></button>
+                    {% endif %}
                     <hr>
 
                     <!-- Blog Comments -->
 
                     <!-- Comments Form -->
+                    
                     <div class="well">
                         <h4>Laissez un commentaire:</h4>
                         {#<form role="form">
@@ -57,13 +60,16 @@
                         <div class="form-group">
                             {{ form_row(formCommentaire.texte,{'attr':{'class' : 'form-control'}}) }}
                         </div>
+                        {% if is_granted("ROLE_USER") %}
                         {{ form_row(formCommentaire.pseudo) }}
                         {{ form_row(formCommentaire.valider,{'attr':{'class' : 'btn btn-primary'}}) }}
 
                         {{form_end(formCommentaire)}}
-
+                        {% else %}
+                            <button type="submit" class="btn btn-primary">Inscrivez vous</button>
+                        {% endif %}
                     </div>
-
+                    
                     <hr>
 
 

@@ -4,6 +4,7 @@ namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\File;
 
 /**
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Constraints\File;
  * @ORM\Table(name="profil")
  * @ORM\Entity(repositoryClass="AdminBundle\Repository\ProfilRepository")
  */
-class Profil
+class Profil implements UserInterface, \Serializable
 {
     /**
      * @var int
@@ -283,7 +284,43 @@ class Profil
         return $this->jaime;
     }
     public function __toString() {
-        return $this->getPseudo();
+        return $this->getEmail();
+    }
+
+    public function eraseCredentials() {
+        
+    }
+
+    public function getPassword() {
+        return $this->mdp;
+    }
+
+    public function getRoles() {
+        return $this->role;
+    }
+
+    public function getSalt() {
+        
+    }
+
+    public function getUsername() {
+        return $this->email;
+    }
+
+    public function serialize() {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->mdp,
+        ));
+    }
+
+    public function unserialize($serialized) {
+         list(
+            $this->id,
+            $this->email,
+            $this->mdp,
+            ) = unserialize($serialized);
     }
 
 }

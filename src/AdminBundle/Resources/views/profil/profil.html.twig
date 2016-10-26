@@ -53,8 +53,10 @@
 
                   <a href="{{path('mesComs', {'id':profil.id})}}" class="btn btn-primary">Commentaires</a>
                   <a href="{{path('mesLikes', {'id':profil.id})}}" class="btn btn-primary">Likes</a>
+                  {% if is_granted("ROLE_ADMIN") %}
                   <a href="{{path('mesArticles', {'id':profil.id})}}" class="btn btn-primary">Articles</a>
                   <a href="{{path('category')}}" class="btn btn-primary">Catégories</a>
+                  {% endif %}
                 </div>
               </div>
             </div>
