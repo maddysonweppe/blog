@@ -76,55 +76,35 @@ footer {
     margin-left: -30px;
     padding-left: 30px;
     background-color: #FFF;
-    height: 325px;
+    
 }
 .titre{
     font-size: 2.2em;
 }
-.bliat{
+.postgeneral{
     margin-top: 20px;
     text-align: justify;
     margin-right: 30px;
 }
-.sidediv {/* The side content*/
+.sidediv {/* Volet de connexion*/
     height: 100%;
     width: 0;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #1c1c1c; /* dark grey*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidediv */
+    background-color: rgba(28, 28, 28, 0.8); /* gris foncé*/
+    overflow-x: hidden; 
+    padding-top: 60px;
+    transition: 0.5s; 
 }
 
-/* The side content links */
-.sidediv a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: inline-block;
-    transition: 0.3s
-}
-
-.sidediv a img {
-  width: 30%;
-  height: auto;
-  display: inline-block;
-}
-
-/* When you mouse over the links, change their color */
-.sidediv a:hover, .offcanvas a:focus{
-    color: #f1f1f1;
-}
-
-/* Position and style the close button (top right corner) */
+/* Bouton de fermeture du volet de connexion */
 .closebtn {
     position: absolute;
     top: 50px;
     right: 25px;
     font-size: 36px !important;
     margin-left: 50px;
+    color: #FFF;
 }
