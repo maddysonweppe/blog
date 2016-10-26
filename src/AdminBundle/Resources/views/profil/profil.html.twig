@@ -2,69 +2,68 @@
 
 
 {% block body %}
-        {% for profil in profil %}
-    
- <div class="container">
-      <div class="row">
-      <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
-          <br><a href="{{ path('editerProfil', {'id':profil.id}) }}" class="btn btn-warning">Modifier</a>
-       <br>
-      </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-   
-   
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title">{{ profil.pseudo }}</h3>
-            </div>
-            <div class="panel-body">
-              <div class="row">
-                  <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="{# http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png #}{{asset('uploads/img/')~ profil.avatar}}{#{{asset('externe/images/soccer.jpg')}}#}" class="img-responsive"> 
-                  <a href="{{path('mesComs', {'id':profil.id})}}" class="btn btn-primary">modifier avatar</a></div>
-                
-
-                <div class=" col-md-9 col-lg-9 "> 
-                  <table class="table table-user-information">
-                    <tbody>
-                      <tr>
-                        <td>Prénom</td>
-                        <td>{{ profil.prenom }}</td>
-                      </tr>
-                      <tr>
-                        <td>Nom</td>
-                        <td>{{ profil.nom }}</td>
-                      </tr>
-                      <tr>
-                        <td>Adresse mail</td>
-                        <td>{{ profil.email }}</td>
-                      </tr>
-                   
-                         <tr>
-                             <tr>
-                        <td>Mot de passe</td>
-                        <td>{{ profil.mdp }}</td>
-                      </tr>
-                       
-                           
-                      </tr>
-                     
-                    </tbody>
-                  </table>
-
-                  <a href="{{path('mesComs', {'id':profil.id})}}" class="btn btn-primary">Commentaires</a>
-                  <a href="{{path('mesLikes', {'id':profil.id})}}" class="btn btn-primary">Likes</a>
-                  {% if is_granted("ROLE_ADMIN") %}
-                  <a href="{{path('mesArticles', {'id':profil.id})}}" class="btn btn-primary">Articles</a>
-                  <a href="{{path('category')}}" class="btn btn-primary">Catégories</a>
-                  {% endif %}
+    {% for profil in profil %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+                    <br><a href="{{ path('editerProfil', {'id':profil.id}) }}" class="btn btn-warning">Modifier</a>
+                    <br>
                 </div>
-              </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+
+
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ profil.pseudo }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="{# http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png #}{{asset('uploads/img/')~ profil.avatar}}{#{{asset('externe/images/soccer.jpg')}}#}" class="img-responsive"> 
+                                    <a href="{{path('mesComs', {'id':profil.id})}}" class="btn btn-primary">modifier avatar</a></div>
+
+
+                                <div class=" col-md-9 col-lg-9 "> 
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                            <tr>
+                                                <td>Prénom</td>
+                                                <td>{{ profil.prenom }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nom</td>
+                                                <td>{{ profil.nom }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Adresse mail</td>
+                                                <td>{{ profil.email }}</td>
+                                            </tr>
+
+                                            <tr>
+                                            <tr>
+                                                <td>Mot de passe</td>
+                                                <td>{{ profil.mdp }}</td>
+                                            </tr>
+
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                    <a href="{{path('mesComs', {'id':profil.id})}}" class="btn btn-primary">Commentaires</a>
+                                    <a href="{{path('mesLikes', {'id':profil.id})}}" class="btn btn-primary">Likes</a>
+                                    {% if is_granted("ROLE_ADMIN") %}
+                                    <a href="{{path('mesArticles', {'id':profil.id})}}" class="btn btn-primary">Articles</a>
+                                    <a href="{{path('category')}}" class="btn btn-primary">Catégories</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
-               
-            
-          </div>
         </div>
-      </div>
-    </div>
-   {% endfor %}
-    {% endblock %}
+    {% endfor %}
+{% endblock %}
