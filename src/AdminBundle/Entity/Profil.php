@@ -27,28 +27,28 @@ class Profil implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="pseudo", type="string", length=255, unique=true)
+     * @ORM\Column(name="pseudo", type="string", length=255, unique=true, nullable=true)
      */
     private $pseudo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
     private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
      */
     private $prenom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255,)
      */
     private $email;
 
@@ -62,7 +62,7 @@ class Profil implements UserInterface, \Serializable
     /**
      * @var UploadedFile
      *
-     * @ORM\Column(name="avatar", type="string", length=255)
+     * @ORM\Column(name="avatar", type="string", length=255, nullable=true)
      * @File(mimeTypes={"image"})
      */
     private $avatar;
