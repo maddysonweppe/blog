@@ -26,9 +26,9 @@ class LoginController extends Controller{
      */
     public function addP() {
         $u = new Profil();
-        $u->setEmail("Lencetre@gmail.com");
-        $u->setMdp("user");
-        $u->setRole(array("ROLE_USER"));
+        $u->setEmail("johnatan@gmail.com");
+        $u->setMdp("admin");
+        $u->setRole(array("ROLE_ADMIN"));
         
         $em = $this->getDoctrine()->getManager();
         $em->persist($u);
