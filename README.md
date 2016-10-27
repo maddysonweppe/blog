@@ -25,5 +25,9 @@ Etape à suivre pour installer le projet "BLOG" après l'avoir téléchargé:
 5. mettre les droits au dossier nouvellement créé
 6. il faut créer / pousser les entities dans votre base de données via le terminal avec la commande:  
 php bin/console doctrine:schema:create
-7. Projet FONCTIONNEL, vous pouvez commencer à naviguer!  
+7. Pour ajouter un compte d'ADMIN utilisez la route (URI) : /869256/addAdmin/
+8. Authentification ADMIN:  
+Email : admin@admin.com  
+Mot de passe : admin  
+9. Projet FONCTIONNEL, vous pouvez commencer à naviguer!  
 ATTENTION, vos entities dans la base de données sont vierges, cela impacte forcément la vue.
