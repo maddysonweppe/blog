@@ -25,7 +25,7 @@ class LoginController extends Controller{
      */
     public function addP() {
         $admin = new Profil();
-        $admin->setEmail("admin@admin.com");
+        $admin->setEmail("admin@admin.fr");
         $admin->setMdp("admin");
         $admin->setRole(array("ROLE_ADMIN"));
         

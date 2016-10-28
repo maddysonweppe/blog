@@ -9,6 +9,7 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\Entity\Article;
+use AdminBundle\Entity\Commentaire;
 use AdminBundle\Form\ArticleType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -80,7 +81,7 @@ class ArticleController extends Controller {
             $em->merge($a);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('mesBrouillons', array(
+            return $this->redirect($this->generateUrl('home', array(
                                 'id' => $a->getId(),
                             ))
             );
@@ -102,7 +103,7 @@ class ArticleController extends Controller {
         $article->setBrouillon(0);
         $em->merge($article);
         $em->flush();
-        return $this->redirectToRoute("mesBrouillons");
+        return $this->redirectToRoute("home");
     }
 
     /**
@@ -111,7 +112,12 @@ class ArticleController extends Controller {
      */
     public function articleDeleteAction(Article $article) {
         $em = $this->getDoctrine()->getManager();
+        
+//        $commentaire = $this->getDoctrine()->getRepository("AdminBundle:Commentaire")->findByArticle($article);
+//        $profil = $this->getDoctrine()->getRepository("AdminBundle:Profil")->findById($id);
+        
         $em->remove($article);
+        
         $em->flush();
 
         return $this->redirect($this->generateUrl('home'));

@@ -18,12 +18,12 @@ Langages, Outils, frameworks utilisaient:
 
 Etape à suivre pour installer le projet "BLOG" après l'avoir téléchargé:
 ==
-1. Commencer par mettre les droits sur le dossier
-2. Faire un composer install dev 
-3. paramétrer le fichier parameters.yml 
-4. mettre à jour votre base de données 
-5. mettre les droits au dossier nouvellement créé
-6. il faut créer / pousser les entities dans votre base de données via le terminal avec la commande:  
+1. Si c'est nécessaire, mettre les droits sur le dossier
+2. Mettre à jour les dépendances 
+3. Paramétrer le fichier parameters.yml 
+4. Lancer la création de la base de données 
+5. Mettre les droits au dossier nouvellement créés
+6. Il faut créer / pousser les entities dans votre base de données via le terminal avec la commande:  
 php bin/console doctrine:schema:create
 7. Pour ajouter un compte d'ADMIN utilisez la route (URI) : /869256/addAdmin/
 8. Authentification ADMIN:  

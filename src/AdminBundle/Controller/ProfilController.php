@@ -90,7 +90,7 @@ class ProfilController extends Controller {
 
     /**
      * @Route("/ajouterProfil", name="ajouterProfil")
-     * @Template("template.html.twig")
+     * @Template("AdminBundle:profil:profilAjouter.html.twig")
      */
     public function profilAjouter(Request $request) {
         $em = $this->getDoctrine()->getManager();
@@ -107,14 +107,14 @@ class ProfilController extends Controller {
 
             $profil->setRole(array("ROLE_USER"));
 
-            $profil->setJaime(null);
+//            $profil->setJaime(null);
 //  Grace à la function / méthode "persist" on met les inforations
 //  du formulaire en mémoire
             $em->persist($profil);
 //  Puis on flush qui va sauvegarder en base de donnée
             $em->flush();
 //  je retourne une redirection vers la vue que je veux via l'alias
-            return $this->redirect($this->generateUrl('connexion'));
+            return $this->redirect($this->generateUrl('home'));
         }
 //  Toujours le même principe, cle => valeur pour lié à la vue
         return array(
