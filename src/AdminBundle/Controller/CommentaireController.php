@@ -22,15 +22,6 @@ use Symfony\Component\HttpFoundation\Request;
  * @author sebastien
  */
 class CommentaireController extends Controller {
-//    -----------COMMENTAIRE----------------------
-
-    /**
-     * @Route("/home/commentaire", name="commentaireHome")
-     * @Template("AdminBundle:commentaire:commentaireHome.html.twig")
-     */
-    public function commentaireHome() {
-        return null;
-    }
 
     /**
      * @Route("/{id}/commentaire", name="commentaire")

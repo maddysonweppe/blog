@@ -29,8 +29,6 @@ class CategorieController extends Controller {
     public function categorie() {
 //        getRepository('AdminBundle:Categorie')findAll = "select * from Categorie"
         $categorie = $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll();
-//        "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
-        //        on créé un nouveau formulaire pour les Categorie
         $formCategorie = $this->createForm(CategorieType::class);
         return array(
             "formCategorie" => $formCategorie->createView(),
@@ -38,32 +36,18 @@ class CategorieController extends Controller {
         );
     }
 
-//
-//    /**
-//     * @Route("/admin/categorie/form", name="form")
-//     * @Template("AdminBundle::ajouter.html.twig")
-//     */
-//    public function formCategorie() {
-////        on créé un nouveau formulaire pour les Categorie
-//        $categorie = $this->createForm(CategorieType::class);
-//        return array("formCategorie" => $categorie->createView());
-//    }
-
     /**
      * @Route("/admin/categorie/valide", name="valide")
      * @param Request $req
      */
     public function ajoutCategorie(Request $req) {
-//        on instancie un nouvelle objet categorie
         $categorie = new Categorie();
         $form = $this->createForm(CategorieType::class, $categorie);
 //        on verifie que c'est une requete de type POST
         if ($req->getMethod() == 'POST') {
             $form->handleRequest($req);
             $em = $this->getDoctrine()->getManager();
-//            
-            $em->persist($categorie);
-//            on enregistre
+            $em->persist($categorie);// on persiste $categorie
             $em->flush();
             return $this->redirectToRoute('category');
         }
@@ -76,7 +60,7 @@ class CategorieController extends Controller {
      */
     public function editCategories($id) {
         $em = $this->getDoctrine()->getEntityManager();
-//        find('AdminBundle:Categorie', $id) == on cherche par id dans la table categorie 
+//        on recupere par id dans la table categorie 
         $categorie = $em->find('AdminBundle:Categorie', $id);
         $form = $this->createForm(CategorieType::class, $categorie);
 //        on créé une une a partir du formulaire pré-remplie avec l'id
@@ -94,7 +78,6 @@ class CategorieController extends Controller {
         if ($req->getMethod() == 'POST') {
             $form->handleRequest($req);
             $em = $this->getDoctrine()->getEntityManager();
-//          on fusionne les entity categorie
             $em->merge($categorie);
             $em->flush();
             return $this->redirect($this->generateUrl('category'));
@@ -108,7 +91,6 @@ class CategorieController extends Controller {
     public function supprimerCategorie($id) {
         $em = $this->getDoctrine()->getManager();
         $categorie = $em->find("AdminBundle:Categorie", $id);
-//        on supprime la categorie
         $em->remove($categorie);
         $em->flush();
         return $this->redirectToRoute('category');

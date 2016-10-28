@@ -9,7 +9,6 @@
 namespace AdminBundle\Controller;
 
 use AdminBundle\Entity\Article;
-use AdminBundle\Entity\Commentaire;
 use AdminBundle\Form\ArticleType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -23,29 +22,21 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ArticleController extends Controller {
 
-//    ------------ARTICLE--------------------
     /**
-     * @Route("/home/article", name="articleHome")
-     * @Template("AdminBundle:article:articleHome.html.twig")
-     */
-    public function articleHome() {
-        return null;
-    }
-
-    /**
-     * @Route("/article/form", name="formArticle")
+     * @Route("/admin/article/form", name="formArticle")
      * @Template("AdminBundle:article:article.html.twig")
      */
     public function articleForm() {
         $formArticle = $this->createForm(ArticleType::class);
         return array(
             'formArticle' => $formArticle->createView(),
+            //        getRepository('AdminBundle:Categorie')->findAll() = select * from Categorie
             "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
         );
     }
 
     /**
-     * @Route("/article/ajouter", name="addArticle")
+     * @Route("/admin/article/ajouter", name="addArticle")
      * @Template("AdminBundle:article:article.html.twig")
      */
     public function articleAjouter(Request $request) {
@@ -58,18 +49,19 @@ class ArticleController extends Controller {
             $nomDuFichier = md5(uniqid()) . "." . $article->getImage()->getClientOriginalExtension();
             $article->getImage()->move('uploads/img', $nomDuFichier);
             $article->setImage($nomDuFichier);
-            $em->persist($article);
+            $em->persist($article);// on persiste $article
             $em->flush();
             return $this->redirect($this->generateUrl('home'));
         }
         return $this->redirectToRoute('ajouter', array(
                     'formArticle' => $formArticle->createView(),
+                    //        getRepository('AdminBundle:Categorie')->findAll() = select * from Categorie
                     "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
         ));
     }
 
     /**
-     * @Route("/{id}/editer/article", name="articleEditer")
+     * @Route("/admin/article/{id}/editer", name="articleEditer")
      * @Template("AdminBundle:article:article.html.twig")
      */
     public function articleEditer(Article $article, Request $request) {
@@ -80,7 +72,7 @@ class ArticleController extends Controller {
         if ($request->getMethod() == 'POST') {
             $formArticle->handleRequest($request);
             $a = $formArticle->getData();
-            $em->merge($a);
+            $em->merge($a);//on merge $a
             $em->flush();
 
             return $this->redirect($this->generateUrl('home', array(
@@ -91,13 +83,15 @@ class ArticleController extends Controller {
         return array(
             'id' => $article->getId(),
             'formArticle' => $formArticle->createView(),
+            //        getRepository('AdminBundle:Categorie')->findAll() = select * from Categorie
             "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+            //        getRepository('AdminBundle:Article')->findByID($article) = select * from Article where id=$article
             "articles" => $this->getDoctrine()->getRepository('AdminBundle:Article')->findById($article),
         );
     }
 
     /**
-     * @Route("admin/publier{id}", name="publier")
+     * @Route("/admin/article/publier{id}", name="publier")
      */
     public function publierArticle(Article $article) {
         $em = $this->getDoctrine()->getEntityManager();
@@ -109,51 +103,22 @@ class ArticleController extends Controller {
     }
 
     /**
-     * @Route("/{id}/articleDelete", name="articleDelete")
+     * @Route("/admin/article/{id}/articleDelete", name="articleDelete")
      * 
      */
     public function articleDeleteAction(Article $article) {
         $em = $this->getDoctrine()->getManager();
 
-//        $commentaire = $this->getDoctrine()->getRepository("AdminBundle:Commentaire")->findByArticle($article);
-//        $profil = $this->getDoctrine()->getRepository("AdminBundle:Profil")->findById($id);
         $commentaires = $em->getRepository("AdminBundle:Commentaire")->findByArticle($article);
 
         foreach ($commentaires as $commentaire) {
             $em->remove($commentaire);
         }
 
-        $em->remove($article);
+        $em->remove($article);//on remove $article
 
         $em->flush();
 
         return $this->redirect($this->generateUrl('home'));
     }
-
-//    
-//    /**
-//     * @Route("/{id}/modifier/article", name="articleModifier")
-//     * @Template("AdminBundle:article:articleEditer.html.twig")
-//     */
-//    public function articleModifier(Article $article, Request $request) {
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $formArticle = $this->createForm(ArticleType::class, $article);
-//
-//        if ($request->getMethod() == 'POST') {
-//            $formArticle->handleRequest($request);
-//            $a = $formArticle->getData();
-//            $em->merge($a);
-//            $em->flush();
-//
-//            return $this->redirect($this->generateUrl('article', array(
-//                                'id' => $a->getId(),
-//                            ))
-//            );
-//        }
-//        return array(
-//            'id' => $article->getId(),
-//            'formArticle' => $formArticle->createView()
-//        );
-//    }
 }

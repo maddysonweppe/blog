@@ -71,9 +71,10 @@ security:
      # evidement on peut jouer sur differents niveaux de restrictions   
     access_control:   
         # Un admin ou un user classique peut ajouter une annonce ... quelque chose d'étrange est ici ....
-#        - { path: ^/a , roles: [ROLE_ADMIN , ROLE_USER] }       
+        - { path: ^/admin , roles: [ROLE_ADMIN , ROLE_USER] }       
         # seul un admin peut ajouter une categorie
-#        - { path: ^/categories , roles: ROLE_ADMIN }         
+        - { path: ^/categorie , roles: ROLE_ADMIN }         
+        - { path: ^/article , roles: ROLE_ADMIN }         
         
             # activate different ways to authenticate
 
