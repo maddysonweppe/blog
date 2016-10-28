@@ -4,23 +4,23 @@
 {% block body %}
     {% for article in article %}
 
-        <!-- Page Content -->
+        <!-- contenu de page -->
         <div class="container">
 
             <div class="row">
 
-                <!-- Blog Post Content Column -->
+                <!-- colonne contenu blog -->
                 <div class="col-lg-8">
 
 
 
-                    <!-- Blog Post -->
+                    <!-- Post Blog -->
 
-                    <!-- Title -->
+                    <!-- Titre -->
                     <h1>{{ article.titre }}</h1>
                     <h2>{{ article.categorie }}</h2>
 
-                    {#    <!-- Author -->
+                    {#    <!-- Auteur -->
                         <p class="lead">
                             par <a href="#">Kirikou l'homme sombre</a>
                         </p>
@@ -33,7 +33,7 @@
                     <hr>
 
                     <!-- Preview Image -->
-                    <img class="img-responsive" src="{{ article.image }}" alt="">
+                    <img class="img-responsive" src="{{ asset('uploads/img/')~article.image }}" alt="">
 
                     <hr>
 
@@ -62,10 +62,10 @@
                             {{ form_widget(formCommentaire.texte,{'attr':{'class' : 'form-control'}}) }}
                         </div>
                         {% if is_granted("ROLE_USER") %}
-                            {{ form_row(formCommentaire.pseudo) }}
-                            {{ form_row(formCommentaire.valider,{'attr':{'class' : 'btn btn-primary'}}) }}
-
-                            {{form_end(formCommentaire)}}
+                            <p>Pseudo: {{app.user.pseudo}}</p>
+                            <input type="submit" class="btn btn-primary"/>
+{#                            {{ form_row(formCommentaire.valider,{'attr':{'class' : 'btn btn-primary'}}) }}#}
+{#                            {{form_end(formCommentaire)}}#}
                         {% else %}
                             <a type="submit" class="btn btn-primary">Inscrivez vous</a>
                         {% endif %}

@@ -16,7 +16,7 @@ $(function(){
 //FONCTION DE CONNEXION
 
 //OUVRIR  L'ONGLET DE CONNEXION 
-function openNav(section) {
+function openLog(section) {
   if (section==1){
     document.getElementById("login").style.width = "100%";
   }
@@ -25,10 +25,9 @@ function openNav(section) {
 }
 
 //FERMER L'ONGLET DE CONNEXION
-function closeNav(section) {
+function closeLog(section) {
   if (section==1){
     document.getElementById("login").style.width = "0";
   }
 }
-
 

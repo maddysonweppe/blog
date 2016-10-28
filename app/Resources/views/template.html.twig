@@ -10,26 +10,31 @@
         <meta name="keywords" content="blog, actu foot, foot, sport, rugby, tennis, e-sport, esport, news,">
 
         <title>sportNews</title>
-
+<!-- Import CSS -->
         <link rel="stylesheet" href="{{ asset('../vendor/twbs/bootstrap/dist/css/bootstrap.css') }}" type="text/css" media="all" />
         <link rel="stylesheet" href="{{ asset('externe/css/style.css') }}" type="text/css" media="all" />
         <link rel="stylesheet" href="{{ asset('externe/css/blog-post.css') }}" type="text/css" media="all" />
         <link rel="stylesheet" href="{{ asset('externe/css/text.css') }}" type="text/css" media="all" />
         <link rel="stylesheet" href="{{ asset('http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css') }}" type="text/css" media="all" />
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
+<!-- /. Import CSS -->  
+
+<!-- Favicon --> <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" /> <!-- /.Favicon -->
+        
     </head>
     <body>
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
+                    <!-- bouton menu version mobile -->
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{path('home')}}">Blog Certif |</a>
+                    <!-- /. bouton menu version mobile -->
+                    <a class="navbar-brand" href="{{path('home')}}">sportNews |</a> <!-- Renvoi à l'accueil du site -->
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
@@ -71,7 +76,7 @@
                                     </ul>
                                 </div>
                             {%else%}
-                                <button class="btn btn-success" onclick="openNav(1);" style=color:white;>Connexion</button>
+                                <button class="btn btn-success" onclick="openLog(1);" style=color:white;>Connexion</button> <!-- Fonction js qui déploit le volet de connexion au clic sur le bouton connexion -->
                             {% endif %}
                         </li>
 
@@ -85,9 +90,9 @@
         <!-- Login -->
         <section id="login" class="sidediv">
 
-            <div class="container">  
+            <div class="container">
 
-                <a href="javascript:void()" class="closebtn" onclick="closeNav(1)">×</a>
+                <a href="javascript:void()" class="closebtn" onclick="closeLog(1)">×</a> <!-- Fonction qui ferme le volet de connexion via une croix (X) -->
 
                 <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
 
@@ -105,7 +110,7 @@
 
                             <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-                            {#                            DEBUT DU FORMULAIRE DE CONNEXION----------------------------------------#}
+                            {#----------------------------------------DEBUT DU FORMULAIRE DE CONNEXION----------------------------------------#}
 
                             <form id="loginform" class="form-horizontal" role="form" action="{{path('loginCheck',{}) }}" method="post">
 
@@ -132,9 +137,8 @@
                                 </div>
 
 
-                                <div style="margin-top:10px" class="form-group">
+                                <div style="margin-top:10px" class="form-group"> 
                                     <!-- Button -->
-
                                     <div class="col-sm-12 controls">
                                         <input id="btn-login" class="btn btn-success" type="submit" value="Connexion"/>
                                         {#<a id="btn-login" href="#" class="btn btn-success">Connexion</a>#}
@@ -255,18 +259,18 @@
                             </ul>
                         </div>
                         <div class="col-md-3 col-md-pull-6 col-sm-4 item">
-                            <h3>A propos de nous</h3>
+                            <h3>Ils nous soutiennent</h3>
                             <ul>
-                                <li><a href="http://fabrique-beweb.com/">lien 1</a></li>
-                                <li><a href="http://simplon.co/">lien 2</a></li>
-                                <li><a href="http://fondespierre.com/presentation">lien 3</a></li>
+                                <li><a href="http://fabrique-beweb.com/">beWeb</a></li>
+                                <li><a href="http://simplon.co/">Simplon</a></li>
+                                <li><a href="http://fondespierre.com/presentation">Fondespierre</a></li>
                             </ul>
                         </div>
                         <div class="col-md-12 col-sm-4 item social">
-                            <a href="http://weppe.fr/"><i class="icon ion-android-globe"></i></a>
-                            <a href="http://www.alexandreleforestier.fr/"><i class="icon ion-android-globe"></i></a>
-                            <a href="http://javary.fr/"><i class="icon ion-android-globe"></i></a>
-                            <a href="http://jo-fournival.fr/"><i class="icon ion-android-globe"></i></a>
+                            <a href="http://weppe.fr/"><i class="icon ion-social-wordpress"></i></a>
+                            <a href="http://www.alexandreleforestier.fr/"><i class="icon ion-social-angular-outline"></i></a>
+                            <a href="http://javary.fr/"><i class="icon ion-social-nodejs"></i></a>
+                            <a href="http://jo-fournival.fr/"><i class="icon ion-social-foursquare-outline"></i></a>
                         </div>
                     </div>
                     <p class="copyright">Certif Blog© 2016</p>

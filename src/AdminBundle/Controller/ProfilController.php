@@ -28,13 +28,28 @@ class ProfilController extends Controller {
      * @Template("AdminBundle:profil:profil.html.twig")
      */
     public function profil($id) {
-        
+
         $profil = $this->getDoctrine()->getRepository("AdminBundle:Profil")->findById($id);
 //        $user = $this->get('security.context')->getToken()->getUser();
 //        $profil = $this->get('security.context')->getToken()->getUser();
         return array(
-                    "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
-                    'profil' => $profil,
+            "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+            'profil' => $profil,
+        );
+    }
+
+    /**
+     * @Route("/{id}/form/profil", name="formProfil")
+     * @Template("AdminBundle:profil:profilEditer.html.twig")
+     */
+    public function profilForm(Profil $profil) {
+        $formProfil = $this->createForm(ProfilType::class, $profil);
+        //  array qui lit la vue (cle => valeur)
+        return array(
+            'profil' => $this->getDoctrine()->getRepository("AdminBundle:Profil")->findById($profil),
+            'id' => $profil->getId(),
+            'formProfil' => $formProfil->createView(),
+            "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
         );
     }
 
@@ -55,6 +70,12 @@ class ProfilController extends Controller {
         if ($request->getMethod() == 'POST') {
 //  Tu lies le formulaire à le requête
             $formProfil->handleRequest($request);
+            $fichier = $profil->getAvatar();
+            $nomDuFichier = md5(uniqid()) . "." . $fichier->guessExtension();
+            $fichier->move(
+                    $this->getParameter('avatars_directory'), $nomDuFichier
+            );
+            $profil->setAvatar($nomDuFichier);
 //  Tu récupère les information du formulaire(getData) dans une variable
             $prof = $formProfil->getData();
 //  Pour mettre à jour une entity en base de donné, on fait un "merge"
@@ -73,19 +94,8 @@ class ProfilController extends Controller {
                                 "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
                             ))
             );
-//            return $this->redirect($this->generateUrl('profil', array(
-//                                'id' => $prof->getId(),
-//                                'profil' => $this->getRepository("AdminBundle:Profil")->findById($profil),
-//                            ))
-//            );
         }
-//  array qui lit la vue (cle => valeur)
-        return array(
-            'profil' => $this->getDoctrine()->getRepository("AdminBundle:Profil")->findById($profil),
-            'id' => $profil->getId(),
-            'formProfil' => $formProfil->createView(),
-            "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
-        );
+        return $this->redirectToRoute('formProfil');
     }
 
     /**
@@ -101,8 +111,6 @@ class ProfilController extends Controller {
 
         if ($request->getMethod() == 'POST') {
             $formProfil->handleRequest($request);
-
-
             $profil->setAvatar("../../externe/images/user.svg");
 
             $profil->setRole(array("ROLE_USER"));
@@ -123,27 +131,20 @@ class ProfilController extends Controller {
         );
     }
 
-    public function editerAvatar(Request $request, $id) {
-//  On doit supprimer un information en particulié, et non pas toute la base de donnée
-//  On récupère par id pour supprimer par id dans la base de donnée
-        $em = $this->getDoctrine()->getManager();
-        $profil = $em->getRepository("AdminBundle:Profil")->findById($id);
-        $formProfil = $this->createForm(ProfilType::class, $profil);
-
-//  On utilise le fonction "remove()" pour supprimer
-        if ($request->getMethod() == 'POST') {
-            $formProfil->handleRequest($request);
-            $nomDuFichier = md5(uniqid()) . "." . $profil->getAvatar()->getClientOriginalExtension();
-            $profil->getAvatar()->move('uploads/img', $nomDuFichier);
-            $profil->setAvatar($nomDuFichier);
-//  Grace à la function / méthode "persist" on met les inforations
-//  du formulaire en mémoire
-            $em->persist($profil);
-//  Puis on flush qui va sauvegarder en base de donnée
-            $em->flush();
-            return $this->redirect($this->generateUrl('connexion'));
-        }
-    }
+//    /**
+//     * @Route("/{id}/editer/Avatar", name="editerAvatar")
+//     * @Template("AdminBundle::ajouter.html.twig")
+//     */
+//    public function editerAvatar($id) {
+//        $em = $this->getDoctrine()->getManager();
+//        $profil = $em->getRepository("AdminBundle:Profil")->findById($id);
+//        $formProfil = $this->createForm(ProfilType::class, $profil);
+//
+//        return array(
+//            'formProfil' => $formProfil->createView(),
+//            "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+//        );
+//    }
 
     /**
      * @Route("/{id}/supprimer", name="supprimerProfil")

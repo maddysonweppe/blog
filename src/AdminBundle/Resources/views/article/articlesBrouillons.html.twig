@@ -8,7 +8,7 @@
         {% for article in articles %}
             <div class="row">
 
-                <div class="col-sm-4"><img class="img-responsive" src="http://www.ouest-france.fr/sites/default/files/styles/image-640x360/public/2016/08/14/peronne-cup-du-beau-football-devant-plus-de-300-personnes-verson.jpg?itok=TIdEr4ve"/></div>
+                <div class="col-sm-4"><img class="img-responsive" src="{{ asset('uploads/img/')~article.image}}"/></div>
                 <div class="col-sm-8">
                     <h3>{{ article.titre }}</h1>
                         <p>{{ article.texte }}</p>
