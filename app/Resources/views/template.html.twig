@@ -39,18 +39,18 @@
                                 <a href="{{path('categorie',{'categories':categorie.nom})}}">{{categorie.nom}}</a>
                             </li>
                         {% endfor %}
-                                                {#<li>
-                                                    <a href="#">{{app.user.email}}</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Rugby</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Tennis</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">eSport</a>
-                                                </li>#}
+                        {#<li>
+                            <a href="#">{{app.user.email}}</a>
+                        </li>
+                        <li>
+                            <a href="#">Rugby</a>
+                        </li>
+                        <li>
+                            <a href="#">Tennis</a>
+                        </li>
+                        <li>
+                            <a href="#">eSport</a>
+                        </li>#}
                         <li>
                             {% if is_granted("ROLE_USER") %}
                                 <div class="dropdown">
@@ -61,7 +61,7 @@
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="{{path('profil',{'id':(app.user.id)})}}">voir profil</a>
-                                            
+
                                         </li>
                                         <li>
 
@@ -81,23 +81,25 @@
             </div>
             <!-- /.container -->
         </nav>
-                                    <section id="login" class="sidediv">
-                                        
-                            <div class="container">  
-                                
-                                <a href="javascript:void()" class="closebtn" onclick="closeNav(1)">×</a>
-                                
-                                <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-                                   
-                                    <div class="panel panel-info" >
-                                        
-                                        <div class="panel-heading">
-                                            
-                                            <div class="panel-title">Connexion</div>
-                                            
-                                            <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Mot de passe oublié ?</a></div>
-                                       
-                                        </div>     
+        <!-- /.navigation -->    
+        <!-- Login -->
+        <section id="login" class="sidediv">
+
+            <div class="container">  
+
+                <a href="javascript:void()" class="closebtn" onclick="closeNav(1)">×</a>
+
+                <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+
+                    <div class="panel panel-info" >
+
+                        <div class="panel-heading">
+
+                            <div class="panel-title">Connexion</div>
+
+                            <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Mot de passe oublié ?</a></div>
+
+                        </div>     
 
                         <div style="padding-top:30px" class="panel-body" >
 
@@ -158,7 +160,7 @@
                         </div>                     
                     </div>  
                 </div>
-                            
+
                 <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
                     <div class="panel panel-info">
                         <div class="panel-heading">
@@ -166,62 +168,62 @@
                             <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide();
                                     $('#loginbox').show()">Déjà un compte ? Connectez-vous</a></div>
                         </div> 
-                        
-{#----------------------------------FORMULAIRE D'INSCRIPTION---------------------------------------------------#}
-                       {# <div class="panel-body" >#}
+                        <!-- /.Login -->
+                        {#----------------------------------FORMULAIRE D'INSCRIPTION---------------------------------------------------#}
+                        {# <div class="panel-body" >#}
+
+                        {#<form id="signupform" class="form-horizontal" role="form">
+
+                            <div id="signupalert" style="display:none" class="alert alert-danger">
+                                <p>Erreur:</p>
+                                <span></span>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="email" class="col-md-3 control-label">Email</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="email" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="firstname" class="col-md-3 control-label">Prenom</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="firstname" placeholder="Prenom">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="col-md-3 control-label">Nom</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="lastname" placeholder="Nom">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-md-3 control-label">Mot de passe</label>
+                                <div class="col-md-9">
+                                    <input type="password" class="form-control" name="passwd" placeholder="Mot de passe">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <!-- Button -->                                        
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Validez</button>  
+                                </div>
+                            </div>
                             
-                            {#<form id="signupform" class="form-horizontal" role="form">
+                            <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
 
-                                <div id="signupalert" style="display:none" class="alert alert-danger">
-                                    <p>Erreur:</p>
-                                    <span></span>
-                                </div>
+
+                            </div>
 
 
 
-                                <div class="form-group">
-                                    <label for="email" class="col-md-3 control-label">Email</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="email" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="firstname" class="col-md-3 control-label">Prenom</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="firstname" placeholder="Prenom">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastname" class="col-md-3 control-label">Nom</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="lastname" placeholder="Nom">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password" class="col-md-3 control-label">Mot de passe</label>
-                                    <div class="col-md-9">
-                                        <input type="password" class="form-control" name="passwd" placeholder="Mot de passe">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <!-- Button -->                                        
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Validez</button>  
-                                    </div>
-                                </div>
-                                
-                                <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
+                        </form>#}
 
-
-                                </div>
-
-
-
-                            </form>#}
-                            
                         {#</div>#}
-                        
-{#-----------------------------------END FORMULAIRE D'INSCRIPTION-------------------------------------------------#}
+
+                        {#-----------------------------------END FORMULAIRE D'INSCRIPTION-------------------------------------------------#}
                     </div>
 
 
