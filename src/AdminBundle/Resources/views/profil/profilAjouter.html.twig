@@ -1,7 +1,48 @@
-<h1>AJOUTER</h1>
+{% extends "::template.html.twig" %}
+{% block body %}
+    <form id="signupform" class="form-horizontal" role="form" action="{{path('ajouterProfil')}}" method="POST">
+        
+        <div class="form-group">
+            <label for="email" class="col-md-3 control-label">Email</label>
+            <div class="col-md-9">
+                {{ form_widget(formProfil.email,{'attr':{'class':'form-control'}}) }}
+                {#        <input type="text" class="form-control" name="email" placeholder="Email">#}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="firstname" class="col-md-3 control-label">Prenom</label>
+            <div class="col-md-9">
+                {{ form_widget(formProfil.prenom,{'attr':{'class':'form-control'}}) }}
+                {#        <input type="text" class="form-control" name="firstname" placeholder="Prenom">#}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastname" class="col-md-3 control-label">Nom</label>
+            <div class="col-md-9">
+                {{ form_widget(formProfil.nom,{'attr':{'class':'form-control'}}) }}
+                {#        <input type="text" class="form-control" name="lastname" placeholder="Nom">#}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-md-3 control-label">Mot de passe</label>
+            <div class="col-md-9">
+                {{ form_widget(formProfil.mdp,{'attr':{'class':'form-control'}}) }}
+                {#        <input type="password" class="form-control" name="passwd" placeholder="Mot de passe">#}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-md-3 control-label">Pseudo</label>
+            <div class="col-md-9">
+                {{ form_widget(formProfil.pseudo,{'attr':{'class':'form-control'}}) }}
+                {#        <input type="password" class="form-control" name="passwd" placeholder="Mot de passe">#}
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- Button -->                                        
+            <div class="col-md-offset-3 col-md-9">
+                <input id="btn-signup" type="submit" class="btn btn-info">
+            </div>
+        </div>
+    </form>
+{% endblock %}
 
-{{form_start(formProfil)}}
-
-{{ form_widget(formProfil) }}
-       
-{{form_end(formProfil)}}

@@ -21,8 +21,6 @@ class ProfilType extends AbstractType
                 ->add('email')
                 ->add('mdp')
                 ->add('avatar', FileType::class, array('data_class' => null))
-                ->add('role')
-                ->add('jaime')
                 ->add('valider',SubmitType::class)        ;
     }
     
