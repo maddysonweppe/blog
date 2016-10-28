@@ -27,7 +27,7 @@
                     <div class="col-md-12" >
                         <div class="col-md-6" >
                             <!-- Preview Image -->
-                            <img class="img-responsive" src="{{ asset('externe/images/rugby.jpg') }}" alt="">
+                            <img class="img-responsive" src="{{ asset(('uploads/img/')~article.image) }}" alt="">
                         </div>
 
 
@@ -40,7 +40,7 @@
 
                                 <!-- Post Content -->
                                 <p class="postgeneral">
-                                    {{article.texte}}
+                                    {{article.texte|truncate(400, true,' ...')}}
                                 </p>
                                 <a href="{{ path('idDetail', {'id':article.id}) }}">
                                     en voir +

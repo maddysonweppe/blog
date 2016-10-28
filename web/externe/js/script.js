@@ -31,4 +31,3 @@ function closeNav(section) {
   }
 }
 
-

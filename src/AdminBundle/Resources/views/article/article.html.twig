@@ -27,24 +27,20 @@
 
             </span>
             {#</div>#}
-
             <!-- creation d'article -->
             <div class="well">
                 <form role="form">
                     <div class="form-group">
                         {#            <textarea class="form-control" rows="3"></textarea>#}
                         {{ form_row(formArticle.texte,{'attr':{'class' : 'form-control'}}) }}
-
                     </div>
-
-                    {{ form_widget(formArticle.brouillon,{'attr':{'class' : 'form-control'}}) }}
-
+                    <div>
+                        {{ form_row(formArticle.brouillon, { 'label': 'Mettre en brouillon:' }) }}
+                    </div>
                     <input type="submit" class="btn btn-primary" value="Publier">
                     {#{{form_end(formArticle)}}#}
-
                 </form>
             </div>
-
             <hr>
         </div>
     </div>

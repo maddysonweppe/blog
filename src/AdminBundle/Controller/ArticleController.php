@@ -55,20 +55,22 @@ class ArticleController extends Controller {
 
         if ($request->getMethod() == 'POST') {
             $formArticle->handleRequest($request);
+            $nomDuFichier = md5(uniqid()) . "." . $article->getImage()->getClientOriginalExtension();
+            $article->getImage()->move('uploads/img', $nomDuFichier);
+            $article->setImage($nomDuFichier);
             $em->persist($article);
             $em->flush();
             return $this->redirect($this->generateUrl('home'));
         }
-        echo 'boo';
-//        return $this->redirectToRoute('ajouter',array(
-//            'formArticle' => $formArticle->createView(),
-//            "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
-//        ));
+        return $this->redirectToRoute('ajouter', array(
+                    'formArticle' => $formArticle->createView(),
+                    "categories" => $this->getDoctrine()->getRepository('AdminBundle:Categorie')->findAll(),
+        ));
     }
 
     /**
      * @Route("/{id}/editer/article", name="articleEditer")
-     * @Template("AdminBundle:article:articleEditer.html.twig")
+     * @Template("AdminBundle:article:article.html.twig")
      */
     public function articleEditer(Article $article, Request $request) {
         $em = $this->getDoctrine()->getManager();
@@ -112,12 +114,17 @@ class ArticleController extends Controller {
      */
     public function articleDeleteAction(Article $article) {
         $em = $this->getDoctrine()->getManager();
-        
+
 //        $commentaire = $this->getDoctrine()->getRepository("AdminBundle:Commentaire")->findByArticle($article);
 //        $profil = $this->getDoctrine()->getRepository("AdminBundle:Profil")->findById($id);
-        
+        $commentaires = $em->getRepository("AdminBundle:Commentaire")->findByArticle($article);
+
+        foreach ($commentaires as $commentaire) {
+            $em->remove($commentaire);
+        }
+
         $em->remove($article);
-        
+
         $em->flush();
 
         return $this->redirect($this->generateUrl('home'));
