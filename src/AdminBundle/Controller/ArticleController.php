@@ -114,7 +114,7 @@ class ArticleController extends Controller {
         $em->remove($article);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('articleHome'));
+        return $this->redirect($this->generateUrl('home'));
     }
 
 //    

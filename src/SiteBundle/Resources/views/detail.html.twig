@@ -20,12 +20,12 @@
                     <h1>{{ article.titre }}</h1>
                     <h2>{{ article.categorie }}</h2>
 
-                {#    <!-- Author -->
-                    <p class="lead">
-                        par <a href="#">Kirikou l'homme sombre</a>
-                    </p>
-
-                    <hr>#}
+                    {#    <!-- Author -->
+                        <p class="lead">
+                            par <a href="#">Kirikou l'homme sombre</a>
+                        </p>
+    
+                        <hr>#}
 
                     <!-- Date/Time -->
                     <p><span class="glyphicon glyphicon-time"></span> Publié le <time>{{ article.date|date('d M Y') }}</time>.</p>
@@ -40,14 +40,15 @@
                     <!-- Post Content -->
                     <p class="lead">{{ article.texte }}</p>
                     {% if is_granted("ROLE_ADMIN") %}
-                    <button id="btn-signup" type="button" class="btn btn-warning"><i class="icon-hand-right"></i><a href="{{ path('articleEditer',{'id':article.id}) }}">Modifier</a></button>
-                    {% endif %}
+                        <button id="btn-signup" type="button" class="btn btn-warning"><i class="icon-hand-right"></i><a href="{{ path('articleEditer',{'id':article.id}) }}">Modifier</a></button>
+                        <button id="btn-signup" type="button" class="btn btn-danger"><i class="icon-hand-right"></i><a href="{{ path('articleDelete',{'id':article.id}) }}">Supprimer</a></button>
+                            {% endif %}
                     <hr>
 
                     <!-- Blog Comments -->
 
                     <!-- Comments Form -->
-                    
+
                     <div class="well">
                         <h4>Laissez un commentaire:</h4>
                         {#<form role="form">
@@ -58,18 +59,18 @@
                         </form>#}
                         {{form_start(formCommentaire,{'attr':{'action':path('addCommentaire', {'id':article.id})}})}}
                         <div class="form-group">
-                            {{ form_row(formCommentaire.texte,{'attr':{'class' : 'form-control'}}) }}
+                            {{ form_widget(formCommentaire.texte,{'attr':{'class' : 'form-control'}}) }}
                         </div>
                         {% if is_granted("ROLE_USER") %}
-                        {{ form_row(formCommentaire.pseudo) }}
-                        {{ form_row(formCommentaire.valider,{'attr':{'class' : 'btn btn-primary'}}) }}
+                            {{ form_row(formCommentaire.pseudo) }}
+                            {{ form_row(formCommentaire.valider,{'attr':{'class' : 'btn btn-primary'}}) }}
 
-                        {{form_end(formCommentaire)}}
+                            {{form_end(formCommentaire)}}
                         {% else %}
-                            <button type="submit" class="btn btn-primary">Inscrivez vous</button>
+                            <a type="submit" class="btn btn-primary">Inscrivez vous</a>
                         {% endif %}
                     </div>
-                    
+
                     <hr>
 
 
@@ -143,16 +144,16 @@
                         <div class="row">
                             {% for categorie in categories %}
                                 {#on boucle sur categorie si il est pair alors il est mis dans la colone de gauche#}
-{#                                {% if loop.index is divisibleby(2) %}#}
-                                    <div class="col-lg-6">
-                                        <ul class="list-unstyled">
+                                {#                                {% if loop.index is divisibleby(2) %}#}
+                                <div class="col-lg-6">
+                                    <ul class="list-unstyled">
 
-                                            <li>
-                                                <a href="{{path('categorie',{'categories':categorie.nom})}}">{{categorie.nom}}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    {# sinon il est mis dans la colone de gauche#}
+                                        <li>
+                                            <a href="{{path('categorie',{'categories':categorie.nom})}}">{{categorie.nom}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                {# sinon il est mis dans la colone de gauche#}
                                 {#{% else %}
                                     <div class="col-lg-6">
                                         <ul class="list-unstyled">

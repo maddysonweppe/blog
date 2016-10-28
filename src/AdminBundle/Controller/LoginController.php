@@ -21,19 +21,17 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 class LoginController extends Controller{
 
     /**
-     * @Route("/addP",name="addP")
-     * @throws Exception
+     * @Route("/869256/addAdmin/",name="addP")
      */
     public function addP() {
-        $u = new Profil();
-        $u->setEmail("johnatan@gmail.com");
-        $u->setMdp("admin");
-        $u->setRole(array("ROLE_ADMIN"));
+        $admin = new Profil();
+        $admin->setEmail("admin@admin.com");
+        $admin->setMdp("admin");
+        $admin->setRole(array("ROLE_ADMIN"));
         
         $em = $this->getDoctrine()->getManager();
-        $em->persist($u);
+        $em->persist($admin);
         $em->flush();
-        
         return $this->redirectToRoute("home");
     }
     
